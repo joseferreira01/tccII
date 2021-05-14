@@ -38,7 +38,7 @@ public class EventoControler {
 
     @GetMapping
     public ResponseEntity<List<Evento>> listarTodos() {
-        //  System.err.println("lista comum"+ eventoServico.listarTodos().get(0) );
+          System.err.println("lista comum");
         return ResponseEntity.ok(eventoServico.listarTodos());
     }
 
@@ -46,7 +46,7 @@ public class EventoControler {
     public ResponseEntity<List<Evento>> todos() {
         List<Evento> listarTodos = eventoServico.listarTodos();
         //listarTodos.get(0).setCapa(null);
-        // System.err.println("lista comum"+ eventoServico.listarTodos().get(0) );
+         System.err.println("lista de eventos");
         return ResponseEntity.ok(listarTodos);
     }
 

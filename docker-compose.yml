@@ -6,10 +6,17 @@ services:
     ports:
       - 27017:27017
     command: --smallfiles
-  ap-usuarios:
+  api-usuarios:
     build: ./modulo_usuario
     image: api-usuario
     ports:
       - 8084:8084
+    links:
+      - api-database
+  api-eventos:
+    build: ./modulo_evento
+    image: api-eventos
+    ports:
+      - 8081:8081
     links:
       - api-database
