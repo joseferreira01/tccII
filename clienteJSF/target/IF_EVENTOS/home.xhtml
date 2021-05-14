@@ -1,0 +1,96 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+
+                template="default_layout.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:define name="content">
+
+
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+
+            <!-- Content Row -->
+            <div class="row col-12">
+
+                <!-- Earnings (Monthly) Card Example -->
+
+
+
+                <style type="text/css">
+                    .value {
+                        font-weight: bold;
+                    }
+
+                    .ui-carousel {
+                        margin-bottom: 20px;
+                    }
+                </style>
+
+                <a href="in.xhtml">forme</a>
+                <h:form>
+               
+                </h:form>
+                <h:form id="form">
+                    <p:dataGrid var="car" value="#{eventoCotrolador.eventos}" columns="4" layout="grid"
+                                rows="20" paginator="false" id="cars"
+
+                                >
+
+
+                        <p:panel style="text-align:center">
+                            <h:panelGrid columns="1" >
+
+
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">#{car.titulo}</div>
+                                            <br/>
+                                            <br/>
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-2"> Inicio #{car.dataInicio}</div>
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-2"> Fim #{car.dataTernino}</div>
+
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-2"><h:commandLink style="text-align: left; position: relative; color: #007bff" action="#{eventoCotrolador.editar(car)}" value="abrir"/> </div>
+                                        </div>
+                                        <div class="col-auto">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </h:panelGrid>
+                        </p:panel>
+
+                    </p:dataGrid>
+                    <h:commandLink class="btn-link" style="text-align: left;margin-right: 3%; position: relative; color: #007bff" action="#{eventoCotrolador.nextPage()}" value="prox"/>
+                    <h:outputLabel style="text-align: left; position: relative; color: #007bff" value="#{eventoCotrolador.next}"/>
+                    <h:commandLink style="text-align: left; position: relative; color: #007bff" action="#{eventoCotrolador.previous()}" value="ant"/>
+
+
+                </h:form>
+            </div>
+
+            <!-- Content Row -->
+
+
+
+
+
+        </div>
+
+
+    </ui:define>
+    <ui:define name="footer">
+        <footer>
+            <p class="text-center">
+                <ui:insert name="footer">
+
+                </ui:insert>
+            </p>
+        </footer>
+    </ui:define>
+</ui:composition>

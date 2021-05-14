@@ -1,0 +1,9 @@
+.sombra1{
+   background-color: #ddd;
+   width: 300px;
+   padding: 10px;
+    
+   box-shadow: 5px 5px 0 #333;
+   -webkit-box-shadow: 5px 5px 0 #333;
+   -moz-box-shadow: 5px 5px 0 #333;
+}

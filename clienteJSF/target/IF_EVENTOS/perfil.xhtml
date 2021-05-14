@@ -1,0 +1,180 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                        xmlns:h="http://xmlns.jcp.org/jsf/html"
+                        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+
+                        template="default_layout.xhtml"
+                        xmlns:p="http://primefaces.org/ui">
+            <ui:define name="content">
+
+
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    
+
+                    <div class="form-group col-4 ">
+                        <!--<img class="img-profile rounded-circle col-4" src="{userCotroladorLogado.img()}"/>-->
+                        <h:graphicImage class="img-profile rounded-circle col-4" value="data:image/jpg;base64,#{userCotroladorLogado.usuario.foto}"/>
+                        
+                        <h:form  enctype="multipart/form-data" class="form-row">
+
+                          
+                            
+                            
+
+                            <h:inputFile  alt="d" id="arquivo" required="true" lang="f" value="#{userCotroladorLogado.part}" requiredMessage="Informe o arquivo" />
+                            <br/>
+                            <br/>
+
+                            <h:commandButton style="position: relative; margin-top: 2%" action="#{userCotroladorLogado.salveFoto()}" value="salvar" class="btn btn-success col-2 " >
+                                <f:ajax execute="@form" render="@all" />
+                            </h:commandButton>
+
+
+                        </h:form>
+                    </div>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <h3>Dados Pessoais</h3>
+
+
+                    <div class="form-row col-48" style="" >
+
+                        <h:form >
+
+                            <div class="form-group col-md-12">
+                                <label for="inputcpf">CPF</label>
+                                <p:inputMask mask="999.999.999-99" value="#{userCotroladorLogado.dadosPessoais.CPF}" class="form-control" id="inputcpf"/>
+                            </div>
+                            <div class="form-group col-md-12" style="position: relative; margin-left: 100%; margin-top: -35% ">
+                                <label for="inputtelfixo">telefone fixo</label>
+                                <p:inputMask value="#{userCotroladorLogado.dadosPessoais.telFixo}" class="form-control"  id="inputtelfixo" mask="(99) 9999-9999"/>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="inputcelular">celular</label>
+                                <p:inputMask value="#{userCotroladorLogado.dadosPessoais.celular}" class="form-control" id="inputcelular" mask="(99) 99999-9999"/>
+                            </div>
+                            <div class="form-group col-md-12"  style="position: relative; margin-left: 100%; margin-top: -35% ">
+                                <label for="inpunas">Nacionalidade</label>
+                                <h:inputText value="#{userCotroladorLogado.dadosPessoais.nascionalidade}" class="form-control" id="inputnas"/>
+                            </div>
+                            <div class="form-group col-md-12"  style="position: relative;   ">
+                                <label for="inputbi">biografia</label>
+                                <h:inputText value="#{userCotroladorLogado.usuario.biografia}" class="form-control" id="inputbio"/>
+                            </div>
+                            <div class="form-group col-md-12" style="position: relative; margin-left: 100%; margin-top: -35% ">
+                                <label for="inputlat">lattes</label>
+                                <h:inputText value="#{userCotroladorLogado.usuario.lattes}" class="form-control" id="inputlat"/>
+                            </div>
+                            <div class="form-group col-md-12"   >
+                                <label for="inputlli">linkdIn</label>
+                                <h:inputText value="#{userCotroladorLogado.usuario.linkedIn}" class="form-control" id="inputli"/>
+                            </div>
+                            <div class="form-group col-md-12" style="position: relative; margin-left: 100%; margin-top: -35% ">
+                                <label for="inputsexo">Sexo</label>
+                                <h:selectOneMenu  value= "#{userCotroladorLogado.dadosPessoais.sexo}" id="inputsexo" class="form-control">
+
+                                    <f:selectItems value="#{userCotroladorLogado.sexo}"/> 
+                                </h:selectOneMenu>
+                            </div>
+                             <div class="form-group col-md-12">
+                                <label for="inputnascimento">Nascimento</label>
+                                <p:inputMask mask="99/99/9999" value="#{userCotroladorLogado.dadosPessoais.nascimento}" class="form-control" id="inputnascimento"/>
+                            </div>
+
+                            <h:commandButton  action="#{userCotroladorLogado.salvarInfo()}" class="btn btn-success" value="salvar"/>
+                        </h:form>
+                    </div>
+
+
+                    <h3 style="position: relative; margin-left: 60%; margin-top: -52% ">Formação</h3>
+
+
+                    <div class="form-row col-48" style="position: relative; margin-left: 55%; margin-top:10px " >
+            
+                        <h:form >
+
+                            <div class="form-group col-md-12">
+                                <label for="inputcpf">Formação</label>
+                                <h:inputText value="#{userCotroladorLogado.formacao.formacao}" class="form-control" id="inputcpf"/>
+                            </div>
+                            <div class="form-group col-md-12" style="position: relative; margin-left: 100%; margin-top: -35% ">
+                                <label for="inputtelfixo">instituição</label>
+                                <h:inputText value="#{userCotroladorLogado.formacao.instituição}" class="form-control"  id="inputtelfixo" />
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="inputcelular">area</label>
+                                <h:inputText value="#{userCotroladorLogado.formacao.aria}" class="form-control" id="inputcelular" />
+                            </div>
+                            <div class="form-group col-md-12" style="position: relative; margin-left: 100%; margin-top: -20% ">
+
+
+                                <h:commandButton  action="#{userCotroladorLogado.salvarFormacao()}" class="btn btn-success" value="salvar"/>
+                            </div>
+                        </h:form>
+                    </div>
+                    <br/>
+
+
+
+                    <div class="form-row col-48" style="position: relative;margin-top: 28%" >
+
+                        <h:form >
+
+                            <div class="form-group col-md-12">
+                                <h3>Endereço</h3>
+                                <label for="inputcpf">rua</label>
+                                <h:inputText  value="#{userCotroladorLogado.endereco.rua}" class="form-control" id="inputcpf"/>
+                            </div>
+                            <div class="form-group col-md-12" style="position: relative; margin-left: 100%; margin-top: -35% ">
+                                <label for="inputtelfixo">bairro</label>
+                                <p:inputText value="#{userCotroladorLogado.endereco.bairro}" class="form-control"  id="inputtelfixo"/>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="input">numero</label>
+                                <p:inputText value="#{userCotroladorLogado.endereco.numero}" class="form-control"  id="input"/>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="inputcelular">CEP</label>
+                                <p:inputMask value="#{userCotroladorLogado.endereco.cep}" class="form-control" id="inputcelular" mask="99999-999"/>
+                            </div>
+
+                            <div class="form-group col-md-12" style="position: relative; margin-left: 100%; margin-top: -68% ">
+                                <label for="inputsexo">estado</label>
+                                <h:selectOneMenu  value= "#{userCotroladorLogado.endereco.uf}" id="inputsexo" class="form-control">
+
+                                    <f:selectItems value="#{userCotroladorLogado.estados}"/> 
+                                </h:selectOneMenu>
+                            </div>
+
+                            <h:commandButton  action="#{userCotroladorLogado.salvarEndereco()}" style="position: relative; margin-left: 120%; margin-top: 10%" class="btn btn-success" value="salvar"/>
+                        </h:form>
+                    </div>
+                    <br/>
+                </div>
+
+
+            </ui:define>
+            <ui:define name="footer">
+                <footer>
+                    <p class="text-center">
+                        <ui:insert name="footer">
+
+                        </ui:insert>
+                    </p>
+                </footer>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

@@ -1,0 +1,6 @@
+
+<factory>
+  <exception-handler-factory>
+     br.com.semeru.exceptions.CustomExceptionHandlerFactory
+  </exception-handler-factory>
+</factory>

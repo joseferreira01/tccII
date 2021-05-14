@@ -1,0 +1,135 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>IF-eventos</title>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <meta name="description" content=""/>
+        <meta name="author" content=""/>
+
+        <title>riar</title>
+
+        <!-- Custom fonts for this template-->
+        <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"/>
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet"/>
+
+        <!-- Custom styles for this template-->
+        <link href="css/sb-admin-2.min.css" rel="stylesheet"/>
+
+    </h:head>
+    <h:body class="bg-gradient-primary">
+        <p:messages  id="messages"  showDetail="false" closable="true"/>
+        <div class="container">
+
+            <!-- Outer Row -->
+            <div class="row justify-content-center">
+
+                <div class="col-xl-10 col-lg-12 col-md-9">
+
+                    <div class="card o-hidden border-0 shadow-lg my-5">
+                        <div class="card-body p-0">
+                            <!-- Nested Row within Card Body -->
+                            <div class="row">
+                                <div class="col-lg-6 d-none d-lg-block bg-password-image"></div>
+                                <div class="col-lg-6">
+                                    <div class="p-5">
+                                        <div class="text-center">
+                                            <h:form>
+                                                <div class="form-group row">
+                                                    <p:outputLabel  for="exampleFirstTitulo">Titulo:</p:outputLabel>
+                                                    <h:inputText rendered="true"  class="form-control form-control-user" id="exampleFirstTitulo" value="#{eventoCotrolador.atividade.titulo}"/>
+
+                                                </div>
+                                                <div class="form-group row">
+                                                    <p:outputLabel class="" for="exampleatdata1">Descrição:</p:outputLabel>
+                                                    <h:inputTextarea rendered="true"  class="form-control form-control-user" id="exampleatdata1" value="#{eventoCotrolador.atividade.descricao}"/>
+
+                                                </div>
+                                                <div  class="form-row">
+                                                    <div class="form-group col-md-12">
+                                                        <label for="inputatividades">tipo</label>
+                                                        <h:selectOneMenu  value= "#{eventoCotrolador.atividade.tipo}" id="inputatividades" class="form-control">
+
+                                                            <f:selectItems value="#{eventoCotrolador.tipoAtividade}"/> 
+                                                        </h:selectOneMenu>
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label for="inputatdata">data inicio</label>
+                                                        <p:inputMask class="form-control form-control-sm" value="#{eventoCotrolador.atividade.dataInicio}" mask="99/99/9999 99:99"  id="inputatdata"/>
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label for="inputatFim">data fim</label>
+                                                        <p:inputMask class="form-control form-control-sm" value="#{eventoCotrolador.atividade.dataFim}" mask="99/99/9999 99:99"  id="inputatFim"/>
+                                                    </div>
+
+                                                </div>
+                                                
+                                                <h:commandButton class="btn btn-primary btn-user btn-block" action="#{eventoCotrolador.novaAtividade()}" value="Salvar"/>  
+                                                <br/>
+                                                <div class="text-center">
+                                                    <a class="btn btn-danger btn- btn-block" href="#" data-toggle="modal" data-target="#apAtModal" >apagar atividade</a>
+                                                </div>
+                                                <br/>
+                                                  <div class="text-center">
+                                                    <a class="btn btn-danger btn- btn-block" href="#" onClick="history.go(-1)" >voltar</a>
+                                                </div>
+                                            </h:form>
+                                        </div>
+
+
+
+
+                                        <hr/>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <h:form>
+            <div class="modal fade" id="apAtModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <h5 class="modal-title" id="exampleModalLabel">Apagar atividade? </h5>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+
+                            <h:commandButton class="btn btn-primary" action="#{eventoCotrolador.apagarAtividade()}" value="sim"/>  
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </h:form>
+        <!-- Bootstrap core JavaScript-->
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Core plugin JavaScript-->
+        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+        <!-- Custom scripts for all pages-->
+        <script src="js/sb-admin-2.min.js"></script>
+
+    </h:body>
+</html>
+

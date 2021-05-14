@@ -1,0 +1,394 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+
+                template="default_layout.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:define name="content">
+
+
+
+        <!-- Begin Page Content -->
+        <div >
+
+
+            <!-- corpo -->
+            <script type="text/css">
+                .lab1{ margin-left: 40%; position: relative ;}
+            </script>
+            <h:form class="col-18">
+                <p:growl id="growl" sticky="true" showDetail="true"/>
+
+                <p:wizard flowListener="#{eventoconf.onFlowProcess}">
+                    <p:tab id="basico" title="Básico" class="badge-secondary" >
+                        <p:panel>
+                            <p:messages />
+                            <h:panelGrid columns="4" columnClasses="label, value">
+
+                                <div class="mb-2 col-1.5">
+                                    <label class="col-md-10" style="margin-left: 35%; position: relative" for="Textarea">Descrição</label>
+                                    <h:inputTextarea value="#{eventoCotrolador.evento.descricao}" class="form-control" id="validationTextarea"/>
+
+                                </div>
+                                <div class="form-group mb-0">
+                                    <label  style="margin-left: 45%; position: relative"  for="Titulo">Titulo</label>
+                                    <h:inputText value="#{eventoCotrolador.evento.titulo}" class="form-control" id="Titulo"/>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-9">
+                                        <label style="margin-left: 100%; position: relative"  for="inputrua">Rua</label>
+                                        <h:inputText value="#{eventoCotrolador.evento.endereco.rua}" class="form-control" id="inputrua"/>
+                                    </div>
+                                    <div class="form-group col-md-8">
+                                        <label style="margin-left: 70%; position: relative" for="inputbairro">Bairro</label>
+                                        <h:inputText value="#{eventoCotrolador.evento.endereco.bairro}" class="form-control" id="inputbaitto"/>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label  style="margin-left: 130%; position: relative" for="inputnumero">Número</label>
+                                        <h:inputText value="#{eventoCotrolador.evento.endereco.numero}" class="form-control" id="inputnumero"/>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-8">
+                                        <label style="margin-left: 50%; position: relative" for="inputCity">Cidade</label>
+                                        <h:inputText value="#{eventoCotrolador.evento.endereco.cidade}" class="form-control" id="inputCity"/>
+                                    </div>
+
+                                    <div class="form-group col-md-4">
+                                        <label  style="margin-left: 300%; position: relative" for="inputEstado">Estado</label>
+                                        <h:selectOneMenu  value= "#{eventoCotrolador.evento.endereco.uf}" id="inputEstado" class="form-control">
+
+                                            <f:selectItems value="#{eventoCotrolador.estados}"/> 
+                                        </h:selectOneMenu>
+                                    </div>
+                                    <div class="form-group col-md-8">
+                                        <label style="margin-left: 100%;margin-top: 30%; position: relative"  for="inputCEP">CEP</label>
+                                        <h:inputText value="#{eventoCotrolador.evento.endereco.cep}" class="form-control" id="inputCEP"/>
+                                    </div>
+                                    <div class="form-group col-md-12 btn-link fas f fa-sm fa-fw mr-2 text-gray-400">
+                                        <a class="dropdown-item" href="local.jsp" >
+                                            google Map  
+                                        </a>
+                                    </div>
+                                    <hr/>
+                                    <div class="form-group col-md-8">
+                                        <label style="margin-left: 110%; margin-top: -20%; position: relative;" for="inputhinit1">data inicio</label>
+                                        <br/>
+                                        <p:inputMask style=" margin-top: 15%; position: relative;"   value="#{eventoCotrolador.evento.dataInicio}" mask="99/99/9999 99:99"  class="form-control" id="inputhinit"/>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label style="margin-left: 80%; margin-top: 300%; position: relative;" for="inputhfim">data fim</label>
+                                        <p:inputMask style=" margin-top: 15%; position: relative;" value="#{eventoCotrolador.evento.dataTernino}" mask="99/99/9999 99:99" class="form-control" id="inputhfim"/>
+                                    </div>
+                                    <div class="form-group col-md-8" style="margin-left: 45%;margin-top: 30%; position: relative" >
+                                        <label for="inputCh">Carga horaria</label>
+                                        <h:inputText value="#{eventoCotrolador.evento.cargaHoraria}" class="form-control" id="inputCh"/>
+                                    </div>
+                                </div>
+
+                            </h:panelGrid>
+                        </p:panel>
+                    </p:tab>
+
+                    <p:tab id="atividades" title="Atividades">
+                        <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#atividadeModal">
+                            novo
+                        </a>
+
+                        <p:panel >
+
+                            <h:panelGrid columns="2" columnClasses="label, value">
+
+                                <div class="dropdown-divider"></div>
+
+                                <h:form>    
+                                    <h:dataTable class="table table-bordered" id="dataTable" width="100%" cellspacing="0" var="at"  value="#{eventoCotrolador.atividades}" style="margin-bottom:40px">
+
+                                        <p:column headerText="Titulo">
+                                            <h:outputText class="text-center" style="text-align: center; position: relative" value="#{at.titulo}" />
+                                        </p:column>
+
+                                        <p:column headerText="Tipo">
+                                            <h:outputText class="text-center" value="#{at.tipo}" />
+                                        </p:column>
+
+                                        <p:column headerText="Inicio" >
+                                            <h:outputText value="#{at.dataInicio}" />
+                                        </p:column>
+
+                                        <p:column headerText="Fim" >
+                                            <h:outputText value="#{at.dataFim}" />
+                                        </p:column>
+                                        <p:column headerText="editar"  class="">
+                                            <h:commandButton class="btn btn-link" action="#{eventoCotrolador.editarAtividade(at)}" value="editar"/>
+
+
+                                        </p:column>
+
+
+                                    </h:dataTable>
+                                </h:form>
+
+                            </h:panelGrid>
+                        </p:panel>
+                    </p:tab>
+
+                    <p:tab id="contact" title="convites">
+                        <p:panel>
+
+                            <h:panelGrid columns="2" columnClasses="label, value">
+                                <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#conviteModal">
+                                    novo
+                                </a>
+                                <br/>
+
+                                <h:form>    
+                                    <h:dataTable class="table table-bordered" id="dataTable" width="100%" cellspacing="0" var="cv"  value="#{eventoCotrolador.convites}" style="margin-bottom:40px">
+
+                                        <h:column>
+                                            <f:facet name="convidado" />
+                                            <h:outputText class="text-center" style="text-align: center; position: relative" value="#{cv.nomeDoConvidado}" />
+                                        </h:column>
+
+                                        <h:column>
+                                            <f:facet name="status" />
+                                            <h:outputText class="text-center" value="#{cv.statusConvite}" />
+                                        </h:column>
+
+                                        <h:column>
+                                            <f:facet name="tipo" />
+                                            <h:outputText value="#{cv.tipo}" />
+                                        </h:column>
+
+                                        
+                                        <h:column class="">
+                                            <h:commandButton class="btn btn-link" action="#{eventoCotrolador.editarAtividade(at)}" value="editar"/>
+
+
+                                        </h:column>
+
+
+                                    </h:dataTable>
+                                </h:form>
+
+                            </h:panelGrid>
+                        </p:panel>
+                    </p:tab>
+                    <p:tab id="palestrantes" title="Participante">
+                        <p:panel>
+
+                            <h:panelGrid columns="2" columnClasses="label, value">
+                                <h:outputText value="nome: *" />
+                                <p:inputText value="#{eventoconf.evento.cargaHoraria}" required="true" label="Email"/>
+
+                                <h:outputText value="organizado: " />
+                                <p:inputText value="#{eventoconf.evento.organizador}"/>
+
+                            </h:panelGrid>
+                        </p:panel>
+                    </p:tab>
+
+                    <p:tab id="confirm" title="Confirmação">
+                        <p:panel>
+                            <h:panelGrid id="confirmation" columns="3" columnClasses="grid,grid,grid">
+                                <h:panelGrid columns="2" columnClasses="label, value">
+                                    <h:outputText value="titulo: " />
+                                    <h:outputText value="#{eventoconf.evento.titulo}" styleClass="outputLabel"/>
+
+                                    <h:outputText value="descrição: " />
+                                    <h:outputText value="#{eventoconf.evento.descricao}" styleClass="outputLabel"/>
+
+                                    <h:outputText value="inicio: " />
+                                    <h:outputText value="#{eventoconf.evento.dataInicio}" styleClass="outputLabel"/>
+                                    <h:outputText value="fim: " />
+                                    <h:outputText value="#{eventoconf.evento.dataTernino}" styleClass="outputLabel"/>
+
+                                </h:panelGrid>
+
+                                <h:panelGrid columns="2" columnClasses="label, value">
+                                    <h:outputText value="organizador: " />
+                                    <h:outputText value="#{eventoconf.evento.organizador}" styleClass="outputLabel"/>
+
+                                </h:panelGrid>
+
+                                <h:panelGrid columns="2" columnClasses="label, value">
+                                    <h:outputText value="GH: " />
+                                    <h:outputText value="#{eventoconf.evento.cargaHoraria}" styleClass="outputLabel"/>
+
+
+                                    <h:outputText />
+                                    <h:outputText />
+                                </h:panelGrid>
+                            </h:panelGrid>
+
+                            <p:commandButton value="salvar" class="btn btn-success  btn-lg" action="#{eventoconf.cadastrar()}" update="growl" process="@this"/>
+                        </p:panel>
+                    </p:tab>
+                </p:wizard>
+
+            </h:form>
+
+            <!-- fim corpo -->
+        </div>
+
+
+
+        <h:form>
+            <div class="modal fade" id="atividadeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+
+                        <div class="modal-body">
+
+                            <div class="form-group row">
+                                <p:outputLabel  for="exampleFirstTitulo">Titulo:</p:outputLabel>
+                                <h:inputText rendered="true"  class="form-control form-control-user" id="exampleFirstTitulo" value="#{eventoCotrolador.atividade.titulo}"/>
+
+                            </div>
+                            <div class="form-group row">
+                                <p:outputLabel  for="exampleatdata1">Descrição:</p:outputLabel>
+                                <h:inputTextarea rendered="true"  class="form-control form-control-user" id="exampleatdata1" value="#{eventoCotrolador.atividade.descricao}"/>
+
+                            </div>
+                            <div  class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label for="inputatividades">tipo</label>
+                                    <h:selectOneMenu  value= "#{eventoCotrolador.atividade.tipo}" id="inputatividades" class="form-control">
+
+                                        <f:selectItems value="#{eventoCotrolador.tipoAtividade}"/> 
+                                    </h:selectOneMenu>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="inputatdata">data inicio</label>
+                                    <p:inputMask class="form-control form-control-sm" value="#{eventoCotrolador.atividade.dataInicio}" mask="99/99/9999 99:99"  id="inputatdata"/>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="inputatFim">data fim</label>
+                                    <p:inputMask class="form-control form-control-sm" value="#{eventoCotrolador.atividade.dataFim}" mask="99/99/9999 99:99"  id="inputatFim"/>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+
+                            <h:commandButton class="btn btn-primary" action="#{eventoCotrolador.novaAtividade()}" value="Salvar"/>  
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal fade" id="atividadeModaldet" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+
+                        <div class="modal-body">
+
+                            <div class="form-group row">
+
+                                <p:outputLabel  for="exampleFirstTitulo2">Titulo:</p:outputLabel>
+                                <h:inputText disabled="true" rendered="true"  class="form-control form-control-user" id="exampleFirstTitulo2" value="#{eventoCotrolador.atividade.titulo}"/>
+
+                            </div>
+                            <div class="form-group row">
+                                <p:outputLabel  for="exampleatdata12">Descrição:</p:outputLabel>
+                                <h:inputTextarea rendered="true"  class="form-control form-control-user" id="exampleatdata12" value="#{eventoCotrolador.atividade.descricao}"/>
+
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputatdata2">data inicio</label>
+                                <p:inputMask class="form-control form-control-sm" disabled="true" value="#{eventoCotrolador.atividade.dataInicio}" mask="99/99/9999 99:99"  id="inputatdata2"/>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputatFim2">data fim</label>
+                                <p:inputMask class="form-control form-control-sm" disabled="true" value="#{eventoCotrolador.atividade.dataFim}" mask="99/99/9999 99:99"  id="inputatFim2"/>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Voltar</button>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal fade" id="conviteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+
+                        <div class="modal-body">
+
+                            <div class="form-group row">
+
+                                <p:outputLabel  for="examplenomeconv">Nome:</p:outputLabel>
+                                <h:inputText  rendered="true"  class="form-control form-control-user" id="examplenomeconv" value="#{eventoCotrolador.convite.nomeDoConvidado}"/>
+
+                            </div>
+                            <div class="form-group row">
+                                <p:outputLabel  for="examplemailconv">Email:</p:outputLabel>
+                                <h:inputText rendered="true"  class="form-control form-control-user" id="examplemailconv" value="#{eventoCotrolador.convite.emailDoConvidado}"/>
+
+                            </div>
+
+
+                            <div class="form-group col-md-8">
+                                <p:outputLabel  for="inputtipo">tipo:</p:outputLabel>
+                                <h:selectOneMenu  value= "#{eventoCotrolador.conv}" id="inputtipo" class="form-control">
+
+                                    <f:selectItems value="#{eventoCotrolador.tipoConvite}"/> 
+                                </h:selectOneMenu>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <h:commandButton class="btn btn-primary" action="#{eventoCotrolador.novoconvite()}" value="Salvar"/>  
+
+                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Voltar</button>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </h:form>
+
+
+    </ui:define>
+    <ui:define name="footer">
+        <footer>
+            <p class="text-center">
+                <ui:insert name="footer">
+
+                </ui:insert>
+            </p>
+        </footer>
+    </ui:define>
+</ui:composition>

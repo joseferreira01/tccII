@@ -1,0 +1,15 @@
+version: "3"
+services:
+  api-database:
+    image: mongo:3.2.4
+    container_name: "api-database"
+    ports:
+      - 27017:27017
+    command: --smallfiles
+  ap-usuarios:
+    build: ./modulo_usuario
+    image: api-usuario
+    ports:
+      - 8084:8084
+    links:
+      - api-database

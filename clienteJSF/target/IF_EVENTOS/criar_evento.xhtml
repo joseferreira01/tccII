@@ -1,0 +1,140 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+
+                template="default_layout.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:define name="content">
+
+
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+
+            <!-- Page Heading -->
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+
+
+            </div>
+
+            <!-- Content Row -->
+            <div class="row">
+
+
+
+
+
+
+            </div>
+
+            <!-- Content Row -->
+
+            <div>
+                <h:form  enctype="multipart/form-data">
+                    <div class="form-row">
+
+
+                    </div>
+                    <div class="mb-3">
+                        <label for="validationTextarea">Descrição</label>
+                        <h:inputTextarea value="#{eventoCotrolador.evento.descricao}" class="form-control is-invalid" id="validationTextarea"  required="true"/>
+                        <div class="invalid-feedback">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Titulo">Titulo</label>
+                        <h:inputText value="#{eventoCotrolador.evento.titulo}" class="form-control" id="Titulo"/>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputrua">Rua</label>
+                            <h:inputText value="#{eventoCotrolador.evento.endereco.rua}" class="form-control" id="inputrua"/>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="inputbairro">Bairro</label>
+                            <h:inputText value="#{eventoCotrolador.evento.endereco.bairro}" class="form-control" id="inputbaitto"/>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="inputnumero">Número</label>
+                            <h:inputText value="#{eventoCotrolador.evento.endereco.numero}" class="form-control" id="inputnumero"/>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputCity">Cidade</label>
+                            <h:inputText requiredMessage="Informe o arquivo" value="#{eventoCotrolador.evento.endereco.cidade}" class="form-control" id="inputCity"/>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="inputEstado">Estado</label>
+                            <h:selectOneMenu  value= "#{eventoCotrolador.evento.endereco.uf}" id="inputEstado" class="form-control">
+
+                                <f:selectItems value="#{eventoCotrolador.estados}"/> 
+                            </h:selectOneMenu>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="inputCEP">CEP</label>
+                            <p:inputMask mask="99999-999" value="#{eventoCotrolador.evento.endereco.cep}" class="form-control" id="inputCEP"/>
+                        </div>
+                        <div class="form-group col-md-12 btn-link fas f fa-sm fa-fw mr-2 text-gray-400">
+                            <a class="dropdown-item" href="local.jsp" >
+                                google Map  
+                            </a>
+                        </div>
+                        <hr/>
+                        <div class="form-group col-md-4">
+                            <label for="inputhinit1">data inicio</label>
+                            <p:inputMask  value="#{eventoCotrolador.date}" mask="99/99/9999 99:99"  class="form-control" id="inputhinit"/>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="inputhfim">data incerramento</label>
+                            <p:inputMask value="#{eventoCotrolador.date2}" mask="99/99/9999 99:99" class="form-control" id="inputhfim"/>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="inputCh">Carga horaria</label>
+                            <h:inputText value="#{eventoCotrolador.evento.cargaHoraria}" class="form-control" id="inputCh"/>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="input">inicio inscrições</label>
+                            <p:inputMask  value="#{eventoCotrolador.evento.inicioInscricao}" mask="99/99/9999 99:99"  class="form-control" id="input"/>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="input2">incerramento iscrições</label>
+                            <p:inputMask requiredMessage="" value="#{eventoCotrolador.evento.terminoInscricao}" mask="99/99/9999 99:99" class="form-control" id="input2"/>
+                        </div>
+                        
+                    </div>
+                    <h:outputLabel value="banner" for="arquivo"  />
+                    <!--<script async="" src="https://imgbb.com/upload.js" data-auto-insert="viewer-links" />-->
+                    <h:inputFile id="arquivo" required="true" value="#{eventoCotrolador.part}" requiredMessage="Informe o arquivo" />
+
+                   
+
+
+                    <h:commandButton action="#{eventoCotrolador.cadastrar()}" value="salvar" class="btn btn-primary">
+                        <f:ajax execute="@form" render="@all" />
+                    </h:commandButton>
+                </h:form>
+
+
+            </div>
+
+
+
+        </div>
+
+
+
+    </ui:define>
+    <ui:define name="footer">
+        <footer>
+            <p class="text-center">
+                <ui:insert name="footer">
+
+                </ui:insert>
+            </p>
+        </footer>
+    </ui:define>
+</ui:composition>
