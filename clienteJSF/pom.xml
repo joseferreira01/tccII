@@ -65,7 +65,7 @@
     </dependencies>
 
     <build>
-        <finalName> IF_EVENTOS</finalName>
+        <finalName>IF_EVENTOS</finalName>
         
         <plugins>
               
