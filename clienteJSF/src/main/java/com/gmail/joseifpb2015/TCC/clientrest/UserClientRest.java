@@ -39,7 +39,7 @@ import org.primefaces.json.JSONObject;
 public class UserClientRest implements Serializable {
 
     //private static final String urlSetting = getProp().getProperty("urluser");
-    private static final String urlSetting = "http://localhost:8084/api/usuarios/";
+    private static final String urlSetting = "http://api-usuarios:8084/api/usuarios/";
     
 
     public List<Usuario> todos() throws JSONException {
