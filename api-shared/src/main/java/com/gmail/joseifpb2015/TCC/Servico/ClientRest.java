@@ -15,13 +15,9 @@ import com.google.gson.GsonBuilder;
 import java.io.OutputStreamWriter;
 import java.io.Serializable;
 import java.net.MalformedURLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.primefaces.json.JSONArray;
 import org.primefaces.json.JSONException;
-import org.primefaces.json.JSONObject;
 import org.springframework.stereotype.Service;
 
 /**
@@ -34,6 +30,7 @@ public class ClientRest<T> implements Serializable, ClientRestFull<T> {
     @Override
     public String enviarMensagem(T obj, Class<T> type, String uri) throws IOException, JSONException {
         URL url = new URL(uri);
+        System.out.println("url emiS "+url);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         // Define que a conexão pode enviar informações e obtê-las de volta:
         connection.setDoOutput(true);
@@ -50,12 +47,12 @@ public class ClientRest<T> implements Serializable, ClientRestFull<T> {
         }
         BufferedReader rd = new BufferedReader(new InputStreamReader(connection.getInputStream()));
         String dados = rd.readLine();
-        System.err.println("lendo dados red " + dados);
+//        System.err.println("lendo dados red " + dados);
 
         if (connection.getResponseCode() != 200) {
             throw new RuntimeException("HTTP GET erro code: " + connection.getResponseCode());
         }
-        System.err.println("usuari log " + obj.toString());
+//        System.err.println("usuari log " + obj.toString());
 
         return dados;
     }

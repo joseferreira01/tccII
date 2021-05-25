@@ -30,4 +30,3 @@ services:
     links:
       - api-eventos
       - api-usuarios
- 

@@ -75,19 +75,22 @@ public class UsuarioControler {
         Usuario resultado = null;
         execute.remove("passou");
         JsonObject msg = new JsonObject();
-        msg.addProperty("remetente", "IF-eventos <" + usuario.getEmail() + ">");
-        msg.addProperty("destinatario", "IF-eventos <" + usuario.getEmail() + ">");
+        
+        msg.addProperty("senderemail","joseifpb2015@gmail.com");
+        msg.addProperty("receiveremail", usuario.getEmail());
+        msg.addProperty("sendername", "Event service");
+        msg.addProperty("receivername", usuario.getNome());
 
         int index = 0;
 
         if (result.hasErrors() || !execute.isEmpty()) {
 
             List<String> erros = new ArrayList<>();
-            for (String value : execute.values()) {
+            execute.values().forEach((value) -> {
                 erros.add(value);
-            }
+            });
             result.getAllErrors().forEach(erro -> erros.add(erro.getDefaultMessage()));
-            return ResponseEntity.badRequest().body(new Response<Usuario>(erros));
+            return ResponseEntity.badRequest().body(new Response<>(erros));
         }
         if (usuario.getId() != null) {
             Usuario u = new Usuario();
@@ -100,24 +103,26 @@ public class UsuarioControler {
             if (u.getEmail() != null && u.getEmail().equals(usuario.getEmail())) {
                 resultado = usuarioServico.atualizar(usuario);
             } else {
-                msg.addProperty(" assunto", "Atualização de Email");
-                msg.addProperty("corpo", "Olã esse é seus novo Email no IF-Eventos use para fazer logim no nosso servico : ");
+                msg.addProperty("subject", "Atualização de Email");
+                msg.addProperty("text", "Olã esse é seu novo Email no IF-Eventos use para fazer logim no nosso servico : ");
                 resultado = usuarioServico.atualizar(usuario);
                 index = 1;
             }
         } else {
             resultado = usuarioServico.cadastrar(usuario);
-            msg.addProperty("assunto", "Confirmação de cadastro");
-            msg.addProperty("corpo", "Bem vindo! Para habilitar sua conta e pode usar nosso servico use o código -> "
+            msg.addProperty("subject", "Confirmação de cadastro");
+            msg.addProperty("text", "Bem vindo! Para habilitar sua conta e pode usar nosso servico use o código -> "
                     + resultado.getId());
+            System.out.println("cadastrou o usuario");
             index = 1;
         }
 
         if (resultado != null && resultado.getId() != null) {
             if (index == 1) {
+                System.out.println("Confiando CadasTro No emAil");
                 confirmaCadastro(msg);
             }
-            return ResponseEntity.ok(new Response<Usuario>(usuario));
+            return ResponseEntity.ok(new Response<>(usuario));
         }
 
         return null;
@@ -138,7 +143,7 @@ public class UsuarioControler {
     @RequestMapping(path = "/login")
     public ResponseEntity<List<Usuario>> login(@Valid @RequestBody Usuario usuario, BindingResult result) {
         Usuario login = null;
-        List<Usuario> us = new ArrayList<Usuario>();
+        List<Usuario> us = new ArrayList<>();
         try {
             login = usuarioServico.login(usuario.getEmail(), usuario.getSenha());
             //if(login!= null & )
@@ -154,7 +159,7 @@ public class UsuarioControler {
     @RequestMapping(path = "/convite")
     public ResponseEntity<List<Usuario>> convitarUsuaria( @Valid @RequestBody Usuario usuario, BindingResult result) {
         Usuario login = null;
-        List<Usuario> us = new ArrayList<Usuario>();
+        List<Usuario> us = new ArrayList<>();
         try {
             login = usuarioServico.buscarPorEmail(usuario.getEmail());
             if(login!= null){
@@ -204,10 +209,10 @@ public class UsuarioControler {
         retorno.add("Conta ativada com sucesso");
         System.err.println("enviando cod " + retorno.get(0));
         JsonObject msg = new JsonObject();
-        msg.addProperty("remetente", "IF-eventos <" + usuario.getEmail() + ">");
-        msg.addProperty("destinatario", "IF-eventos <" + usuario.getEmail() + ">");
-        msg.addProperty("assunto", "Codigo de validaçao");
-        msg.addProperty("corpo", "Olá "
+        msg.addProperty("senderemail", "joseifpb2015@gmail.com");
+        msg.addProperty("receiveremail", usuario.getEmail());
+        msg.addProperty("subject", "Codigo de validação");
+        msg.addProperty("text", "Olá "
                 + user.getNome() + ",\n Esse Código de validaçao e'pessoal e intransferivel: "
                 + "código -> " + user.getId());
 
@@ -250,6 +255,7 @@ public class UsuarioControler {
 
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<Integer> remove(@PathVariable(name = "id") String id) {
+        System.err.println("removendo usuario "+id);
         usuarioServico.remover(id);
         return ResponseEntity.ok(1);
 
