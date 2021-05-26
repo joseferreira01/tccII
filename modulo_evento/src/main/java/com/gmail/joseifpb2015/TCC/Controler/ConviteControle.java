@@ -105,19 +105,21 @@ public class ConviteControle {
         Convite resultado = null;
 
         JsonObject msg = new JsonObject();
-        msg.addProperty("remetente", "IF-eventos <" + convite.getEmailremetente() + ">");
-        msg.addProperty("destinatario", "IF-eventos <" + convite.getEmailDoConvidado() + ">");
+        msg.addProperty("sendername",  convite.getRemetente());
+        msg.addProperty("senderemail",  convite.getEmailremetente());
+        msg.addProperty("receivername",  ".");
+        msg.addProperty("receiveremail", convite.getEmailDoConvidado());
         resultado = Servico.cadastrar(convite);
         if (resultado.getId() != null) {
-            msg.addProperty("assunto", "Convite");
-            msg.addProperty("corpo", "Bem vindo! " + convite.getNomeDoConvidado() + " \n\n "
+            msg.addProperty("subject", "Convite");
+            msg.addProperty("text", "Bem vindo! " + convite.getNomeDoConvidado() + " \n\n "
                     + "você está sendo convidado(a) por " + convite.getRemetente() + " para participar do evento: \n\n"
                     + convite.getTituloEvento() + "\n\n que ocorre entre: " + convite.getDataEvento() + " e " + convite.getTerminoEvento()
-                    + " para aceitar o convite cadastre-se no nosso site: www.if_eventos.com.br e  responda o convite por favor. ");
+                    + " para aceitar o convite cadastre-se no nosso site: http://localhost:8080/clienteJSF/faces/index.xhtml e  responda o convite por favor. ");
         } else {
-            msg.addProperty("destinatario", "IF-eventos <" + convite.getEmailremetente() + ">");
-            msg.addProperty("assunto", "erro ao enviar o convite ");
-            msg.addProperty("corpo", "Hove um problema no convite de  " + convite.getEmailDoConvidado() + ""
+            msg.addProperty("senderemail", convite.getEmailremetente());
+            msg.addProperty("subjetc", "erro ao enviar o convite ");
+            msg.addProperty("text", "Hove um problema no convite de  " + convite.getEmailDoConvidado() + ""
                     + " para o evento \n \n" + convite.getTituloEvento());
         }
         confirmaCadastro(msg);

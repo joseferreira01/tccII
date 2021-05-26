@@ -50,7 +50,7 @@ public class InscricaoControler {
     @Autowired
     private InscricaoServico inscricaoServico;
     @Autowired
-    private ClientRestFull<Object> resf;
+   
 
     @GetMapping
     public ResponseEntity<List<Inscricao>> listarTodos() {
@@ -71,17 +71,10 @@ public class InscricaoControler {
     public ResponseEntity<Inscricao> cadastrar(@Valid @RequestBody Inscricao inscricao, BindingResult result) throws IOException, JSONException {
         System.err.println("cadastrando inscriçao");
         try {
-            JsonObject msg = new JsonObject();
-            msg.addProperty("remetente", "IF-eventos <" + inscricao.getEmailUsuario() + ">");
-            msg.addProperty("destinatario", "IF-eventos <" + inscricao.getEmailUsuario() + ">");
-           //inscricaoServico.Validar(inscricao);
+          
             if (inscricao!=null) {
                 Inscricao reslt = inscricaoServico.cadastrar(inscricao);
-                msg.addProperty("assunto", "Confirmação inscrição");
-                msg.addProperty("corpo", "Bem vindo! sua incrição está confirmada no evento: " + inscricao.getTituloEvento() + " ");
-                System.err.println("cadastra inscricao servi "+reslt);
-                confirmaCadastro(msg);
-
+               System.err.println("cadastra inscricao servi "+reslt);
                 return ResponseEntity.ok(reslt);
             }
             return ResponseEntity.ok(new Inscricao());
@@ -90,26 +83,17 @@ public class InscricaoControler {
         return null;
     }
 
-    public int confirmaCadastro(JsonObject mensagem) {
-
-        try {
-            resf.enviarMensagem(mensagem, Object.class,
-                    env.getProperty("service.email"));
-        } catch (Exception ex) {
-            return 0;
-        }
-        return 1;
-    }
+   
 
     @PutMapping(path = "/{id}")
     public ResponseEntity<Response<Inscricao>> atualizar(@PathVariable(name = "id") String id, @Valid @RequestBody Inscricao usuario, BindingResult result) {
         if (result.hasErrors()) {
             List<String> erros = new ArrayList<>();
             result.getAllErrors().forEach(erro -> erros.add(erro.getDefaultMessage()));
-            return ResponseEntity.badRequest().body(new Response<Inscricao>(erros));
+            return ResponseEntity.badRequest().body(new Response<>(erros));
         }
         usuario.setId(id);
-        return ResponseEntity.ok(new Response<Inscricao>(inscricaoServico.atualizar(usuario)));
+        return ResponseEntity.ok(new Response<>(inscricaoServico.atualizar(usuario)));
 
     }
 

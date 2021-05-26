@@ -80,11 +80,11 @@ public class EventoControler {
         if (result.hasErrors()) {
             List<String> erros = new ArrayList<>();
             result.getAllErrors().forEach(erro -> erros.add(erro.getDefaultMessage()));
-            return ResponseEntity.badRequest().body(new Response<Evento>(erros));
+            return ResponseEntity.badRequest().body(new Response<>(erros));
 
         }
         System.err.println("controle api " + evento.getOrganizador() + evento.getEndereco());
-        return ResponseEntity.ok(new Response<Evento>(eventoServico.cadastrar(evento)));
+        return ResponseEntity.ok(new Response<>(eventoServico.cadastrar(evento)));
     }
 
     @PutMapping(path = "/{id}")
@@ -92,17 +92,17 @@ public class EventoControler {
         if (result.hasErrors()) {
             List<String> erros = new ArrayList<>();
             result.getAllErrors().forEach(erro -> erros.add(erro.getDefaultMessage()));
-            return ResponseEntity.badRequest().body(new Response<Evento>(erros));
+            return ResponseEntity.badRequest().body(new Response<>(erros));
         }
         evento.setId(id);
-        return ResponseEntity.ok(new Response<Evento>(eventoServico.atualizar(evento)));
+        return ResponseEntity.ok(new Response<>(eventoServico.atualizar(evento)));
 
     }
 
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<Response<Integer>> delete(@PathVariable(name = "id") String id) {
         eventoServico.remover(id);
-        return ResponseEntity.ok(new Response<Integer>(1));
+        return ResponseEntity.ok(new Response<>(1));
 
     }
 }
