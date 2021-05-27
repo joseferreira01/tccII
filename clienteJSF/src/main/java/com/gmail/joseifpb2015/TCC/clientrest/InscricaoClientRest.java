@@ -36,7 +36,7 @@ import org.primefaces.json.JSONObject;
 public class InscricaoClientRest implements Serializable {
 
     //private static final String urlSetting = getProp().getProperty("urluser");
-    private static final String urlSetting = "http://localhost:8084/api/usuarios/inscricao";
+    private static final String urlSetting = "http://api-usuarios:8084/api/usuarios/inscricao";
     
 
     public List<Inscricao> todos() throws JSONException {

@@ -23,4 +23,6 @@ public interface UsuarioServico extends Servico<Usuario> {
 
     public Usuario habilitarConta(String codigo);
     public List<Usuario> findAllEmail(List<String> emails);
+    @Override
+     public Usuario cadastrar(Usuario usuario);
 }

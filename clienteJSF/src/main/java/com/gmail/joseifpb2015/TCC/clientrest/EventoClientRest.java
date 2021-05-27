@@ -37,7 +37,8 @@ import org.primefaces.json.JSONObject;
 @ApplicationScoped
 public class EventoClientRest implements Serializable {
 
-    private static final String urlSetting = "http://localhost:8081/api/";
+   // private static final String urlSetting = "http://localhost:8081/api/";
+    private static final String urlSetting = "http://api-eventos:8081/api/";
 
     public List<Evento> todos() throws JSONException {
 
