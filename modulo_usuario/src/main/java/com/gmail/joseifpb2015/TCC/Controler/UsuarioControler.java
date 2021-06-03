@@ -43,8 +43,9 @@ import org.springframework.core.env.Environment;
 @RequestMapping(path = "/api/usuarios")
 //@RequestMapping(path = "/api/usuarios")
 public class UsuarioControler {
-      @Autowired
-	private Environment env;
+
+    @Autowired
+    private Environment env;
 
     private final UserValidation uv = new UserValidation();
 
@@ -75,8 +76,8 @@ public class UsuarioControler {
         Usuario resultado = null;
         execute.remove("passou");
         JsonObject msg = new JsonObject();
-        
-        msg.addProperty("senderemail","joseifpb2015@gmail.com");
+
+        msg.addProperty("senderemail", "joseifpb2015@gmail.com");
         msg.addProperty("receiveremail", usuario.getEmail());
         msg.addProperty("sendername", "Event service");
         msg.addProperty("receivername", usuario.getNome());
@@ -146,29 +147,31 @@ public class UsuarioControler {
         List<Usuario> us = new ArrayList<>();
         try {
             login = usuarioServico.login(usuario.getEmail(), usuario.getSenha());
-            //if(login!= null & )
-            us.add(login);
+            if (login == null) {
+               return null;
+            }
         } catch (Exception e) {
-            us.add(new Usuario());
+            System.err.println("Erro de login " + e.getMessage());
         }
 
         us.add(login);
         return ResponseEntity.ok(us);
     }
+
     @PostMapping
     @RequestMapping(path = "/convite")
-    public ResponseEntity<List<Usuario>> convitarUsuaria( @Valid @RequestBody Usuario usuario, BindingResult result) {
+    public ResponseEntity<List<Usuario>> convitarUsuaria(@Valid @RequestBody Usuario usuario, BindingResult result) {
         Usuario login = null;
         List<Usuario> us = new ArrayList<>();
         try {
             login = usuarioServico.buscarPorEmail(usuario.getEmail());
-            if(login!= null){
-           
-            usuarioServico.atualizar(login);
-        }
-           usuario.setSenha(null);
-           usuarioServico.cadastrar(usuario);
-           
+            if (login != null) {
+
+                usuarioServico.atualizar(login);
+            }
+            usuario.setSenha(null);
+            usuarioServico.cadastrar(usuario);
+
         } catch (Exception e) {
             us.add(new Usuario());
         }
@@ -255,7 +258,7 @@ public class UsuarioControler {
 
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<Integer> remove(@PathVariable(name = "id") String id) {
-        System.err.println("removendo usuario "+id);
+        System.err.println("removendo usuario " + id);
         usuarioServico.remover(id);
         return ResponseEntity.ok(1);
 
