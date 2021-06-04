@@ -32,7 +32,6 @@ public class Usuario implements Serializable {
     private String id;
     @Indexed(name = "EMAIL_UNIQUE", unique = true)
     private String email;
-    @Indexed(name = "SENHA_UNIQUE", unique = true)
     private String senha;
     private List<InfoAdicional> infoAdicionais;
     @Enumerated(EnumType.STRING)

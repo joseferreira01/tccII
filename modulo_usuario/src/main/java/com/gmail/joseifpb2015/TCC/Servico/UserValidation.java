@@ -38,7 +38,7 @@ public class UserValidation {
         }
 
         if (usuario.getNome() == null || usuario.getNome().trim().isEmpty()
-                || usuario.getNome().length()<10 ||usuario.getNome().length()>60) {
+                || usuario.getNome().length()<7 ||usuario.getNome().length()>60) {
             resultado.put("nome", "Nome deve conter de 7 a 60 caracteres.");
         } else if (!usuario.getNome().matches("[A-Za-zÀ-ú0-9 ]+")) {
             resultado.put("nome", "Nome não deve conter sibolos especiais (% - $ _ # @, por exemplo).");

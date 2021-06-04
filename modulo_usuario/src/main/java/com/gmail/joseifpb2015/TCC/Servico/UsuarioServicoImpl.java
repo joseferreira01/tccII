@@ -32,7 +32,9 @@ public class UsuarioServicoImpl extends ServicoImpl<Usuario, String> implements 
 
     @Override
     public Usuario login(String email, String senha) {
+        System.err.println("emai s login "+email);
         Usuario u = repositorio.findByEmail(email);
+         System.err.println("emai s login "+u);
         if (u != null && u.getSenha().equals(senha)) {
             return u;
         }
