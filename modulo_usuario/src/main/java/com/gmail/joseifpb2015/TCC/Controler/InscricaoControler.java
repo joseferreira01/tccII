@@ -5,7 +5,6 @@
  */
 package com.gmail.joseifpb2015.TCC.Controler;
 
-import com.gmail.joseifpb2015.TCC.Servico.ClientRestFull;
 import com.gmail.joseifpb2015.TCC.Servico.InscricaoServico;
 import com.gmail.joseifpb2015.TCC.Servico.UserValidation;
 import com.gmail.joseifpb2015.TCC.response.Response;
@@ -24,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.gmail.joseifpb2015.TCC.entidades.Inscricao;
-import com.google.gson.JsonObject;
 import java.io.IOException;
 import org.primefaces.json.JSONException;
 import org.springframework.context.annotation.Configuration;
