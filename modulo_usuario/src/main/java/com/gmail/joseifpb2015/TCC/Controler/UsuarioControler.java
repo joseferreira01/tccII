@@ -235,7 +235,7 @@ public class UsuarioControler {
             String senha = usuario.getSenha();
             user.setSenha(senha);
             usuarioServico.atualizar(user);
-            retorno.add("Email enviado com sucesso");
+            retorno.add("Senha Atualisada com sucesso");
 
         } catch (Exception e) {
             retorno.add("erro tente novamente");
