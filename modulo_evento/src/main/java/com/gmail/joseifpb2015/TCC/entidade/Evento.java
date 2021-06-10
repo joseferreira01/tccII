@@ -47,6 +47,7 @@ public class Evento implements Serializable {
     private int cargaHoraria;
      private String capa;
      private String form;
+     private String formato;
      
 
     public Evento() {
@@ -72,6 +73,14 @@ public class Evento implements Serializable {
 
     public void setColaboradores(List<String> colaboradores) {
         this.colaboradores = colaboradores;
+    }
+
+    public String getFormato() {
+        return formato;
+    }
+
+    public void setFormato(String formato) {
+        this.formato = formato;
     }
 
     public List<String> getParticipantes() {

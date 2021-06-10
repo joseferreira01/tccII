@@ -107,9 +107,9 @@
                         </div>
                          <div class="form-group col-md-4">
                                         <label  style="margin-top:-15% ; margin-left: 2%; position: relative" for="inputtipoevento">Tipo do evento</label>
-                                        <h:selectOneMenu  value= "#{eventoCotrolador.evento.endereco.uf}" id="inputtipoevento" class="form-control">
+                                        <h:selectOneMenu  value= "#{eventoCotrolador.evento.formato}" id="inputtipoevento" class="form-control">
 
-                                            <f:selectItems value="#{eventoCotrolador.tipos}"/> 
+                                            <f:selectItems value="#{eventoCotrolador.formato}"/> 
                                         </h:selectOneMenu>
                                     </div>
             

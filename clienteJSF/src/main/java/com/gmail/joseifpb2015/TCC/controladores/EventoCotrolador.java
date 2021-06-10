@@ -66,14 +66,14 @@ public class EventoCotrolador implements Serializable {
     private List<Evento> eventos;
     private List<Atividade> atividades;
     HashMap<String, String> estados;
-    HashMap<String, String> tipos;
+    HashMap<String, String> formato;
 
-    public HashMap<String, String> getTipos() {
-        return tipos;
+    public HashMap<String, String> getFormato() {
+        return formato;
     }
 
-    public void setTipos(HashMap<String, String> tipos) {
-        this.tipos = tipos;
+    public void setFormato(HashMap<String, String> formato) {
+        this.formato = formato;
     }
     HashMap<String, String> tipoAtividade;
     HashMap<String, String> tipoConvite;
@@ -100,12 +100,12 @@ public class EventoCotrolador implements Serializable {
         estados.put("SP", "São Paulo");
         estados.put("RJ", "Rio de Janeiro");
         
-        tipos = new HashMap<>();
-        tipos.put("Palestra", "Palestra");
-        tipos.put("Workshop", "Workshop");
-        tipos.put("Congresso", "Congresso");
-        tipos.put("Simpósios", "Simpósios");
-        tipos.put("Seminários", "Seminários");
+        formato = new HashMap<>();
+        
+        formato.put("Presencial","Presencial");
+        formato.put("online", "online");
+        formato.put("hibrido", "hibrido");
+       
        
        
         

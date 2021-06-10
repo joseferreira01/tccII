@@ -24,7 +24,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
  */
 @Document
 public class Evento implements Serializable {
-  @Id
+
+    @Id
     private String id;
     @Indexed(name = "TITULO_UNIQUE", unique = true)
     private String titulo;
@@ -44,8 +45,17 @@ public class Evento implements Serializable {
     private String organizador;
     private String url;
     private int cargaHoraria;
-     private String capa;
-     private String form;
+    private String capa;
+    private String form;
+    private String formato;
+
+    public String getFormato() {
+        return formato;
+    }
+
+    public void setFormato(String formato) {
+        this.formato = formato;
+    }
 
     public Evento() {
         this.endereco = new Endereco();
@@ -107,9 +117,11 @@ public class Evento implements Serializable {
     public void addColaborador(String email) {
         colaboradores.add(email);
     }
+
     public void addParticipante(String email) {
         participantes.add(email);
     }
+
     public void addPalestrante(String email) {
         System.out.println("com.gmail.joseifpb2015.TCC.entidade.Evento.addPalestrante()");
         palestrante.add(email);
@@ -118,9 +130,11 @@ public class Evento implements Serializable {
     public void removerColaborador(List<String> emails) {
         colaboradores.removeAll(emails);
     }
+
     public void removerPalestrante(String emails) {
         palestrante.remove(emails);
     }
+
     public void removerParticipante(String email) {
         participantes.remove(email);
     }
@@ -216,7 +230,6 @@ public class Evento implements Serializable {
     public String getDataTernino() {
         return dataTernino;
     }
-     
 
     public void setDataTernino(String dataTernino) {
         this.dataTernino = dataTernino;
@@ -253,8 +266,6 @@ public class Evento implements Serializable {
     public void setForm(String form) {
         this.form = form;
     }
-    
-    
 
     @Override
     public int hashCode() {
