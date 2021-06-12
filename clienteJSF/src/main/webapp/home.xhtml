@@ -30,15 +30,13 @@
                     }
                 </style>
 
-                <a href="in.xhtml">forme</a>
+<!--                <a href="in.xhtml">forme</a>-->
                 <h:form>
                
                 </h:form>
                 <h:form id="form">
                     <p:dataGrid var="car" value="#{eventoCotrolador.eventos}" columns="4" layout="grid"
-                                rows="20" paginator="false" id="cars"
-
-                                >
+                                rows="20" paginator="false" id="cars" >
 
 
                         <p:panel style="text-align:center">
@@ -46,29 +44,42 @@
 
 
                                 <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">#{car.titulo}</div>
+                                   
+                                    <h:commandLink  action="#{eventoCotrolador.editar(car)}" >
+                                        <div style="background-image: url(data:image/jpg;base64,#{car.capa}); color: red; width: 230px; height: 150px; position: relative;margin: 5px">
+                                         
+                                        </div>
+                                    <div  class="row no-gutters align-items-center">
+                                        
+                                        
+                                           <div class="col-auto align-items-center text-center">
+                                               
+                                              
+                                                   
+                                                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-2">
+                                                             
+                                                          <div style="margin-left: 35px; margin-top: 10px " class="h5 mb-0 font-weight-bold text-gray-800">#{car.titulo}</div>
                                             <br/>
                                             <br/>
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-2"> Inicio #{car.dataInicio}</div>
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-2"> Fim #{car.dataTernino}</div>
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-2" style="font-size: 15px;margin-left: 35px"> Inicio #{car.dataInicio}</div>
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-2" style="font-size: 15px;margin-left: 35px"> Fim #{car.dataTernino}</div>
 
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-2"><h:commandLink style="text-align: left; position: relative; color: #007bff" action="#{eventoCotrolador.editar(car)}" value="abrir"/> </div>
-                                        </div>
-                                        <div class="col-auto">
+                                            </div>
+                             
+                                             
 
                                         </div>
+                                               
                                     </div>
+                                         </h:commandLink>
                                 </div>
                             </h:panelGrid>
                         </p:panel>
 
                     </p:dataGrid>
-                    <h:commandLink class="btn-link" style="text-align: left;margin-right: 3%; position: relative; color: #007bff" action="#{eventoCotrolador.nextPage()}" value="prox"/>
+                    <h:commandLink class="btn-link" style="text-align: left;margin-right: 3%; position: relative; color: #007bff; margin-right: 5px" action="#{eventoCotrolador.nextPage()}" value="próximo"/>
                     <h:outputLabel style="text-align: left; position: relative; color: #007bff" value="#{eventoCotrolador.next}"/>
-                    <h:commandLink style="text-align: left; position: relative; color: #007bff" action="#{eventoCotrolador.previous()}" value="ant"/>
+                    <h:commandLink style="text-align: left; position: relative; color: #007bff" action="#{eventoCotrolador.previous()}" value="  Anterior"/>
 
 
                 </h:form>
