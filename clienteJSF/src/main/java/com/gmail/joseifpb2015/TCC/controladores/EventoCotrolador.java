@@ -5,12 +5,10 @@
  */
 package com.gmail.joseifpb2015.TCC.controladores;
 
-import com.gmail.joseifpb2015.TCC.Entidades.InfoAdicional;
 import com.gmail.joseifpb2015.TCC.utilitario.Mensagem;
 import com.gmail.joseifpb2015.TCC.clientrest.EventoClientRest;
 import com.gmail.joseifpb2015.TCC.clientrest.FormClientRest;
 import com.gmail.joseifpb2015.TCC.clientrest.InscricaoClientRest;
-import com.gmail.joseifpb2015.TCC.clientrest.UserClientRest;
 import com.gmail.joseifpb2015.TCC.entidades.Campo;
 import com.google.gson.Gson;
 import java.awt.Image;
@@ -35,8 +33,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.Part;
 import javax.swing.ImageIcon;
-import javax.ws.rs.core.Request;
-import javax.ws.rs.core.Response;
 import org.apache.tomcat.util.http.fileupload.ByteArrayOutputStream;
 import org.primefaces.event.FlowEvent;
 import org.primefaces.json.JSONException;
@@ -761,6 +757,22 @@ public class EventoCotrolador implements Serializable {
         }
         return "";
         
+    }
+    public String deleteEvento(Evento e){
+          Usuario usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+   
+          if(usuario.getId().equalsIgnoreCase(e.getOrganizador()))
+              try {
+                  servico.delete( "eventos/",e.getId());
+                    msg.addMessage("Evento excluído");
+                    eventos.remove(e);
+                     return "home?faces-redirect=true";
+          } catch (IOException ex) {
+                  System.out.println("erro ao deletar "+ex.getMessage());
+                    msg.addMessage("Erro na operação tente novamente");
+              Logger.getLogger(EventoCotrolador.class.getName()).log(Level.SEVERE, null, ex);
+          }
+        return null;
     }
     
 }

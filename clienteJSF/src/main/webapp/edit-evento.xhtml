@@ -274,7 +274,7 @@
                                 </h:panelGrid>
                             </h:panelGrid>
 
-                            <p:commandButton value="salvar" class="btn btn-success  btn-lg" action="#{eventoconf.cadastrar()}" update="growl" process="@this"/>
+                            <p:commandButton value="salvar" class="btn btn-success  btn-lg" action="#{eventoCotrolador.deleteEvento(eventoCotrolador.evento)}" update="growl" process="@this"/>
                         </p:panel>
                     </p:tab>
                 </p:wizard>
