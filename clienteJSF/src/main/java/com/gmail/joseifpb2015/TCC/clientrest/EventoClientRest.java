@@ -190,7 +190,7 @@ public class EventoClientRest implements Serializable {
 
         try {
             BufferedReader responseBuffer = getMetodo(urlSetting + "eventos/key/" + id);
-            System.err.println("host " + urlSetting + id);
+         //   System.err.println("host " + urlSetting + id);
             StringBuffer dados = new StringBuffer(responseBuffer.readLine());
             return converte(dados).get(0);
 
@@ -225,9 +225,9 @@ public class EventoClientRest implements Serializable {
 
         try (OutputStreamWriter outputStream = new OutputStreamWriter(connection.getOutputStream())) {
             //outputStream.write(json.getBytes("UTF-8"));
-            System.err.println("jso " + json.toString());
+         //   System.err.println("jso " + json.toString());
             outputStream.write(json.toString());
-            System.err.println("json client " + json.toString());
+         //   System.err.println("json client " + json.toString());
         }
         if (connection.getResponseCode() != 200) {
             throw new RuntimeException("HTTP GET erro code: " + connection.getResponseCode());
@@ -237,7 +237,7 @@ public class EventoClientRest implements Serializable {
 
     public void aualizarevento(Evento evento) throws MalformedURLException, IOException {
         URL url = new URL(urlSetting +"eventos/"+ evento.getId());
-        System.err.println("atualizand " + urlSetting + evento.getId());
+        //System.err.println("atualizand " + urlSetting + evento.getId());
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         // Define que a conexão pode enviar informações e obtê-las de volta:
         connection.setDoOutput(true);

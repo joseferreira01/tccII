@@ -135,7 +135,7 @@ public class EventoCotrolador implements Serializable {
     }
     
     public void atividadePage(int page) throws JSONException {
-        System.err.println("contro lisst atividade");
+        //System.err.println("contro lisst atividade");
 //  Usuario usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
         atividades = servico.listAtividades(evento.getId(), page - 1);
         if (eventos.size() < 1 || next < 1) {
@@ -146,13 +146,13 @@ public class EventoCotrolador implements Serializable {
     
     public String editarAtividade(Atividade atividade) {
         this.atividade = atividade;
-        System.err.println("editar atividade");
+        //System.err.println("editar atividade");
         return "edit-atividada?faces-redirect=true";
     }
     
     public String criarAtividade() {
         this.atividade = new Atividade();
-        System.err.println("editar atividade");
+      //  System.err.println("editar atividade");
         return "criar-atividada?faces-redirect=true";
     }
     
@@ -230,7 +230,7 @@ public class EventoCotrolador implements Serializable {
         this.evento = evento;
         
         if (usuario.getId() == null ? evento.getOrganizador() == null : usuario.getId().equals(evento.getOrganizador())) {
-            System.err.println("pagina de edi " + evento);
+         //   System.err.println("pagina de edi " + evento);
             return "edit-evento?faces-redirect=true";
         }
         return "ver?faces-redirect=true";
@@ -253,11 +253,11 @@ public class EventoCotrolador implements Serializable {
         
         try {
             if (!validarData(date) && validarData(date2)) {
-                System.err.println("data vlide");
+             //   System.err.println("data vlide");
                 msg.addMessage("data invalida");
                 return null;
             }
-            System.out.println(part.getContentType());
+            //System.out.println(part.getContentType());
             
             byte[] arquivoByte = toByteArrayUsingJava(part.getInputStream());
             evento.setCapa(base64(arquivoByte));
@@ -273,170 +273,24 @@ public class EventoCotrolador implements Serializable {
             Gson g = new Gson();
             StringBuffer json = new StringBuffer();
             json.append(g.toJson(evento));
-            System.out.println("json evento -> " + json);
+           // System.out.println("json evento -> " + json);
             servico.salvarEvento(json);
             eventos = servico.todos();
+            msg.addMessage("Evento salvo");
         } catch (IOException | JSONException e) {
             msg.addMessage("erro tente novamente");
             return null;
         }
+          return "edit-evento?faces-redirect=true";
         
-        msg.addMessage("Evento salvo");
-        try {
-            if (!validarData(date) && validarData(date2)) {
-                System.err.println("data vlide");
-                msg.addMessage("data invalida");
-                return null;
-            }
-            //Usuario usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
-            //System.err.println("usuario da sesao "+usuario);
-            evento.setDataInicio(date);
-            evento.setDataTernino(date2);
-            evento.setOrganizador(usuario.getId());
-            //System.out.println("evento criado "+evento.getEndereco().getUF());
-            Gson g = new Gson();
-            StringBuffer json = new StringBuffer();
-            json.append(g.toJson(evento));
-            System.out.println("json evento -> " + json);
-            servico.salvarEvento(json);
-            eventos = servico.todos();
-        } catch (IOException | JSONException e) {
-            msg.addMessage("erro tente novamente");
-            return null;
-        }
-        
-        msg.addMessage("Evento salvo");
-        try {
-            if (!validarData(date) && validarData(date2)) {
-                System.err.println("data vlide");
-                msg.addMessage("data invalida");
-                return null;
-            }
-            //Usuario usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
-            //System.err.println("usuario da sesao "+usuario);
-            evento.setDataInicio(date);
-            evento.setDataTernino(date2);
-            evento.setOrganizador(usuario.getId());
-            //System.out.println("evento criado "+evento.getEndereco().getUF());
-            Gson g = new Gson();
-            StringBuffer json = new StringBuffer();
-            json.append(g.toJson(evento));
-            System.out.println("json evento -> " + json);
-            servico.salvarEvento(json);
-            eventos = servico.todos();
-        } catch (IOException | JSONException e) {
-            msg.addMessage("erro tente novamente");
-            return null;
-        }
-        
-        msg.addMessage("Evento salvo");
-        try {
-            if (!validarData(date) && validarData(date2)) {
-                System.err.println("data vlide");
-                msg.addMessage("data invalida");
-                return null;
-            }
-            //Usuario usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
-            //System.err.println("usuario da sesao "+usuario);
-            evento.setDataInicio(date);
-            evento.setDataTernino(date2);
-            evento.setOrganizador(usuario.getId());
-            //System.out.println("evento criado "+evento.getEndereco().getUF());
-            Gson g = new Gson();
-            StringBuffer json = new StringBuffer();
-            json.append(g.toJson(evento));
-            System.out.println("json evento -> " + json);
-            servico.salvarEvento(json);
-            eventos = servico.todos();
-        } catch (IOException | JSONException e) {
-            msg.addMessage("erro tente novamente");
-            return null;
-        }
-        
-        msg.addMessage("Evento salvo");
-        try {
-            if (!validarData(date) && validarData(date2)) {
-                System.err.println("data vlide");
-                msg.addMessage("data invalida");
-                return null;
-            }
-            //Usuario usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
-            //System.err.println("usuario da sesao "+usuario);
-            evento.setDataInicio(date);
-            evento.setDataTernino(date2);
-            evento.setOrganizador(usuario.getId());
-            //System.out.println("evento criado "+evento.getEndereco().getUF());
-            Gson g = new Gson();
-            StringBuffer json = new StringBuffer();
-            json.append(g.toJson(evento));
-            System.out.println("json evento -> " + json);
-            servico.salvarEvento(json);
-            eventos = servico.todos();
-        } catch (IOException | JSONException e) {
-            msg.addMessage("erro tente novamente");
-            return null;
-        }
-        
-        msg.addMessage("Evento salvo");
-        try {
-            if (!validarData(date) && validarData(date2)) {
-                System.err.println("data vlide");
-                msg.addMessage("data invalida");
-                return null;
-            }
-            //Usuario usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
-            //System.err.println("usuario da sesao "+usuario);
-            evento.setDataInicio(date);
-            evento.setDataTernino(date2);
-            evento.setOrganizador(usuario.getId());
-            //System.out.println("evento criado "+evento.getEndereco().getUF());
-            Gson g = new Gson();
-            StringBuffer json = new StringBuffer();
-            json.append(g.toJson(evento));
-            System.out.println("json evento -> " + json);
-            servico.salvarEvento(json);
-            eventos = servico.todos();
-        } catch (IOException | JSONException e) {
-            msg.addMessage("erro tente novamente");
-            return null;
-        }
-        
-        msg.addMessage("Evento salvo");
-        try {
-            if (!validarData(date) && validarData(date2)) {
-                System.err.println("data vlide");
-                msg.addMessage("data invalida");
-                return null;
-            }
-            //Usuario usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
-            //System.err.println("usuario da sesao "+usuario);
-            evento.setDataInicio(date);
-            evento.setDataTernino(date2);
-            evento.setOrganizador(usuario.getId());
-            //System.out.println("evento criado "+evento.getEndereco().getUF());
-            Gson g = new Gson();
-            StringBuffer json = new StringBuffer();
-            json.append(g.toJson(evento));
-            System.out.println("json evento -> " + json);
-            servico.salvarEvento(json);
-            eventos = servico.todos();
-        } catch (IOException | JSONException e) {
-            msg.addMessage("erro tente novamente");
-            return null;
-        }
-        
-        msg.addMessage("Evento salvo");
-        this.evento = new Evento();
-        return "home?faces-redirect=true";
-
-        //return "home?faces-redirect=true";
+       
     }
     
     public String novaAtividade() {
         try {
             
             atividade.setIdEvento(evento.getId());
-            System.err.println("jsom atividade " + atividade.toString());
+          //  System.err.println("jsom atividade " + atividade.toString());
             Gson g = new Gson();
             StringBuffer json = new StringBuffer();
             json.append(g.toJson(atividade));
@@ -458,7 +312,7 @@ public class EventoCotrolador implements Serializable {
         convite.setRemetente(usuario.getNome());
         convite.setTituloEvento(evento.getTitulo());
         convite.setTipo(TipoConvidado.valueOf(conv));
-        System.err.println("jsom atividade " + convite.toString());
+      //  System.err.println("jsom atividade " + convite.toString());
         Gson g = new Gson();
         StringBuffer json = new StringBuffer();
         json.append(g.toJson(convite));
@@ -469,7 +323,7 @@ public class EventoCotrolador implements Serializable {
             return "edit-evento?faces-redirect=true";
         }
         msg.addMessage("salvo");
-        System.err.println(convite);
+      ///  System.err.println(convite);
         convite = new Convite();
         return "edit-evento?faces-redirect=true";
         
@@ -768,7 +622,7 @@ public class EventoCotrolador implements Serializable {
                     eventos.remove(e);
                      return "home?faces-redirect=true";
           } catch (IOException ex) {
-                  System.out.println("erro ao deletar "+ex.getMessage());
+              //    System.out.println("erro ao deletar "+ex.getMessage());
                     msg.addMessage("Erro na operação tente novamente");
               Logger.getLogger(EventoCotrolador.class.getName()).log(Level.SEVERE, null, ex);
           }
