@@ -39,6 +39,8 @@ public class AutorizacaoFilter implements Filter {
         if (request.getRequestURI().endsWith("/faces/index.xhtml")
                 || request.getRequestURI().endsWith("/faces/al-senha.xhtml")
                 || request.getRequestURI().endsWith("/faces/habiltar.xhtml")
+                || request.getRequestURI().endsWith("/faces/in.xhtml")
+                || request.getRequestURI().endsWith("/faces/ver.xhtml")
                 || request.getRequestURI().endsWith("/faces/404.xhtml")
                 || request.getRequestURI()
                 .contains("/javax.faces.img/")) {

@@ -34,9 +34,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.Part;
-import org.apache.commons.io.FilenameUtils;
 import org.apache.tomcat.util.http.fileupload.ByteArrayOutputStream;
-import org.primefaces.event.FileUploadEvent;
 import org.primefaces.json.JSONArray;
 import org.primefaces.json.JSONException;
 import org.primefaces.json.JSONObject;
@@ -62,6 +60,7 @@ public class UserCotroladorLogado implements Serializable {
     private Formacao formacao;
     private Usuario usuario;
     private boolean isconvite = false;
+    private boolean is = false;
     private int cont = 0;
     private Part part;
     private Endereco endereco;
@@ -111,6 +110,14 @@ public class UserCotroladorLogado implements Serializable {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
 
+    }
+
+    public boolean isIs() {
+        return is;
+    }
+
+    public void setIs(boolean is) {
+        this.is = is;
     }
 
     public Map<String, String> getSexo() {
@@ -236,6 +243,7 @@ public class UserCotroladorLogado implements Serializable {
     public void setFormacao(Formacao formacao) {
         this.formacao = formacao;
     }
+    
 
     public void carregaEstados() {
         estados = new HashMap<>();
@@ -287,7 +295,7 @@ public class UserCotroladorLogado implements Serializable {
 
     private List<Convite> convites(String dados) {
         try {
-            System.err.println("convertendo convite");
+            System.err.println("convertendo convite "+ dados);
             List<Convite> convite = new ArrayList<>();
             JSONArray jsonArr = new JSONArray(dados);
             Gson gson = new GsonBuilder().create();
@@ -306,6 +314,13 @@ public class UserCotroladorLogado implements Serializable {
     }
 
     private void carregarConvites() {
+        //System.out.println("chamando os convete "+usuario.getEmail());
+        if(usuario==null){
+            covites =Collections.EMPTY_LIST;
+            return;
+          
+        }
+            
         this.covites = convites(servicoEveRest.convites(usuario.getEmail()));
         if (covites.size() > 0) {
             this.isconvite = true;

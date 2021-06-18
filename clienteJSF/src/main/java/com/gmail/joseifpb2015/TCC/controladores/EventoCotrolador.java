@@ -240,6 +240,10 @@ public class EventoCotrolador implements Serializable {
         return "ver?faces-redirect=true";
         
     }
+    public String home(Evento e){
+        this.evento = e;
+         return "ver?faces-redirect=true";
+    }
     
     public byte[] getFoto() {
         return foto;
