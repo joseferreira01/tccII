@@ -43,7 +43,7 @@
                 <button type="button" onclick="closeMarker()" class="btn btn-default" aria-label="Left Align">
                     <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span> Remover
                 </button>
-                <form action="/falai/local1" id="formlocal" method="post">
+                <form action="/clienteJSF/localfaces" id="formlocal" method="post">
 
 
                     <input type="text" id="local" name="local" class="form-control" style="display: none;">

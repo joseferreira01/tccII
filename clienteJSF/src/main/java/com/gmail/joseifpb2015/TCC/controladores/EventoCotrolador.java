@@ -11,6 +11,7 @@ import com.gmail.joseifpb2015.TCC.clientrest.FormClientRest;
 import com.gmail.joseifpb2015.TCC.clientrest.InscricaoClientRest;
 import com.gmail.joseifpb2015.TCC.entidades.Campo;
 import com.google.gson.Gson;
+import com.vividsolutions.jts.io.WKTReader;
 import java.awt.Image;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -63,6 +64,7 @@ public class EventoCotrolador implements Serializable {
     private List<Atividade> atividades;
     HashMap<String, String> estados;
     HashMap<String, String> formato;
+    private WKTReader reader = new WKTReader();
 
     public HashMap<String, String> getFormato() {
         return formato;
@@ -264,8 +266,9 @@ public class EventoCotrolador implements Serializable {
             Image image = new ImageIcon(arquivoByte).getImage();
             File file = new File("img");
 
-            // FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("img", file);
-            //System.err.println("usuario da sesao "+usuario);
+             String localizacao = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("local");
+            System.err.println("local pomto"+localizacao);
+        //    evento.getEndereco().setLocalizacao(reader.read("POINT(" + localizacao + ")"));
             evento.setDataInicio(date);
             evento.setDataTernino(date2);
             evento.setOrganizador(usuario.getId());

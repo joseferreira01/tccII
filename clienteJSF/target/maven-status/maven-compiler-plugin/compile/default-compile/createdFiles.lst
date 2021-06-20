@@ -8,6 +8,7 @@ com/gmail/joseifpb2015/TCC/exceptions/CustomExceptionHandlerFactory.class
 com/gmail/joseifpb2015/TCC/utilitario/forn.class
 com/gmail/joseifpb2015/TCC/controladores/Evento.class
 com/gmail/joseifpb2015/TCC/validadores/UserValidation.class
+com/gmail/joseifpb2015/TCC/controladores/Local.class
 com/gmail/joseifpb2015/TCC/filter/AutorizacaoFilter.class
 com/gmail/joseifpb2015/TCC/utilitario/Mensagem.class
 com/gmail/joseifpb2015/TCC/controladores/Form.class
