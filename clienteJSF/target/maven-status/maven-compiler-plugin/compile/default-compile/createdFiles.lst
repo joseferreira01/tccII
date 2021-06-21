@@ -24,6 +24,7 @@ com/gmail/joseifpb2015/TCC/exceptions/NonexistentEntityException.class
 com/gmail/joseifpb2015/TCC/controladores/formIncricao.class
 com/gmail/joseifpb2015/TCC/controladores/TipoConvidado.class
 Usuario.class
+com/gmail/joseifpb2015/TCC/controladores/Localizacao.class
 com/gmail/joseifpb2015/TCC/controladores/Status.class
 com/gmail/joseifpb2015/TCC/controladores/Usuario.class
 com/gmail/joseifpb2015/TCC/controladores/Inscricao.class

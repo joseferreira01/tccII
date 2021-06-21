@@ -66,7 +66,7 @@
         <script>
             function funcao1(a)
             {
-                alert("Eu sou um alert!"+a);
+                
                     document.getElementById("local").value = a;
 
             }
@@ -162,7 +162,8 @@
                             // Only geocodes have viewport.
                             bounds.union(place.geometry.viewport);
                             var posBusca = place.geometry.location;
-                            $("#local").val(posBusca.lat() + " " + posBusca.lng());
+                              funcao1(posBusca.lat+","+posBusca.lng);
+                          
                         } else {
                             bounds.extend(place.geometry.location);
                         }
@@ -197,7 +198,7 @@
                     position: location,
                     map: map
                 });
-
+                    funcao1(marker.position.lat()+','+marker.position.lng())
                 $('#local').val(marker.position.lat() + ' ' + marker.position.lng());
 
                 var infowindow = new google.maps.InfoWindow({

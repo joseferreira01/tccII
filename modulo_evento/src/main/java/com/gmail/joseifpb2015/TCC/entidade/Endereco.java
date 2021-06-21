@@ -22,13 +22,13 @@ public class Endereco implements Serializable{
     private String cep;
     private String bairro;
     private int numero;
-    private  Geometry localizacao;
+    private  Localizacao localizacao;
 
     public Endereco() {
     }
     
 
-    public Endereco(String rua, String cidade, String UF, String CEP, String bairro, int numero, Geometry localizacao) {
+    public Endereco(String rua, String cidade, String UF, String CEP, String bairro, int numero, Localizacao localizacao) {
         this.rua = rua;
         this.cidade = cidade;
         this.uf = UF;
@@ -86,18 +86,19 @@ public class Endereco implements Serializable{
         this.numero = numero;
     }
 
-    public Geometry getLocalizacao() {
+    public Localizacao getLocalizacao() {
         return localizacao;
     }
 
-    public void setLocalizacao(Geometry localizacao) {
+    public void setLocalizacao(Localizacao localizacao) {
         this.localizacao = localizacao;
     }
 
     @Override
     public String toString() {
-        return "Endereco{" + "rua=" + rua + ", cidade=" + cidade + ", UF=" + uf + ", CEP=" + cep + ", bairro=" + bairro + ", numero=" + numero + ", localizacao=" + localizacao + '}';
+        return "Endereco{" + "rua=" + rua + ", cidade=" + cidade + ", uf=" + uf + ", cep=" + cep + ", bairro=" + bairro + ", numero=" + numero + ", localizacao=" + localizacao + '}';
     }
+
 
    
 }
