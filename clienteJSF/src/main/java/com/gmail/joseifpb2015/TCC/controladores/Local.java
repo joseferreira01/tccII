@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author jose
  */
-@WebServlet(name = "Local", urlPatterns = {"/local"})
+@WebServlet(name = "Local", urlPatterns = {"/local1"})
 public class Local extends HttpServlet {
 
     /**
@@ -35,8 +35,10 @@ public class Local extends HttpServlet {
           try {
             String local = request.getParameter("local");
             request.getSession(true);
-            if(request.getSession()== null ||local==null)
+            if(request.getSession()== null ||local==null){
+                System.out.println("nao pegou map");
                 response.sendRedirect("/clienteJSF/faces/local.jsp");
+            }
             
             request.getSession().setAttribute("local", local);
             System.out.println("servet "+local);

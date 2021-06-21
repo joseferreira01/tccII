@@ -18,13 +18,18 @@
         <script src="resources/js/jquery-2.1.4.min.js"></script>
 
         <script src="resources/js/bootstrap.min.js"></script>
-        <script src="resources/js/map2.js"> </script>
+        <script src="resources/js/map2.js"></script>
 
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBab8JBkgtgI3IPJLQiCol30M8nEvE2ER4&libraries=places,geometry&callback=initMap"
-        async defer></script>
+        <!--        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBab8JBkgtgI3IPJLQiCol30M8nEvE2ER4&libraries=places,geometry&callback=initMap"
+                async defer></script>-->
+
+        <script
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCeTua1TtcfSvdWnXFzB4Gu4CM88KBny34&callback=initMap&libraries=&v=weekly"
+            async
+        ></script>
 
 
-        <div class="form-group">
+        <div  class="form-group">
             <h4 class="info text-center center-block text-success">para começar infome um local</h4>
 
             <input id="pac-input" type="text" class=" navbar-brand2 navbar-collapse  text-center "  placeholder="Digite uma localidade aqui" style="left: 40%;position: relative">
@@ -39,11 +44,11 @@
                 <button onclick="enableAddMarker()" type="button" class="btn btn-default" aria-label="Enable Marker">
                     <span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span> Adicionar
                 </button>
-                
+
                 <button type="button" onclick="closeMarker()" class="btn btn-default" aria-label="Left Align">
                     <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span> Remover
                 </button>
-                <form action="/clienteJSF/localfaces" id="formlocal" method="post">
+                <form action="/clienteJSF/faces/local1" id="formlocal" method="POST">
 
 
                     <input type="text" id="local" name="local" class="form-control" style="display: none;">
@@ -59,6 +64,12 @@
 
 
         <script>
+            function funcao1(a)
+            {
+                alert("Eu sou um alert!"+a);
+                    document.getElementById("local").value = a;
+
+            }
             var map;
 
             var markers = [];
@@ -71,7 +82,7 @@
             function initMap() {
                 map = new google.maps.Map(document.getElementById('map'), {
                     center: {lat: -34.397, lng: 150.644},
-                    zoom: 15
+                    zoom: 10
                 });
 
                 var infoWindow = new google.maps.InfoWindow({map: map});
@@ -90,7 +101,10 @@
                             title: 'Você está aqui.'
                         });
                         map.setCenter(pos);
-                        $('#local').val(pos.lat + ' ' + pos.lng);
+                        // document.getElementsByName("local").value(pos.lat);
+                        funcao1(pos.lat+","+pos.lng);
+
+
                     }, function () {
                         handleLocationError(true, infoWindow, map.getCenter());
                     });
@@ -147,12 +161,12 @@
                         if (place.geometry.viewport) {
                             // Only geocodes have viewport.
                             bounds.union(place.geometry.viewport);
-                            var posBusca = place.geometry.location; 
-                            $("#local").val(posBusca.lat()+" "+posBusca.lng());
+                            var posBusca = place.geometry.location;
+                            $("#local").val(posBusca.lat() + " " + posBusca.lng());
                         } else {
                             bounds.extend(place.geometry.location);
                         }
-                          
+
                     });
                     map.fitBounds(bounds);
                 });
@@ -210,6 +224,7 @@
                     markers[i].addListener('click', function () {
                         this.setMap(null);
                         $('#local').val(" ");
+
                     });
                 }
             }
@@ -217,6 +232,7 @@
             function closeThisMarker() {
                 infoWindow.marker.setMap(null);
             }
+
 
         </script>
 

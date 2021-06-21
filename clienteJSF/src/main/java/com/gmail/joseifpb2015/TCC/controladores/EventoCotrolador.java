@@ -277,7 +277,7 @@ public class EventoCotrolador implements Serializable {
             StringBuffer json = new StringBuffer();
             json.append(g.toJson(evento));
            // System.out.println("json evento -> " + json);
-            servico.salvarEvento(json);
+           // servico.salvarEvento(json);
             eventos = servico.todos();
             msg.addMessage("Evento salvo");
         } catch (IOException | JSONException e) {
