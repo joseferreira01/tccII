@@ -25,4 +25,5 @@ public interface UsuarioServico extends Servico<Usuario> {
     public List<Usuario> findAllEmail(List<String> emails);
     @Override
      public Usuario cadastrar(Usuario usuario);
+      List<Usuario> findByIdIn(List<String> id);
 }

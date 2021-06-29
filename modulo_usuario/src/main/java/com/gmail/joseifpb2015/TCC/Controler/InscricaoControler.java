@@ -23,11 +23,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.gmail.joseifpb2015.TCC.entidades.Inscricao;
+import com.gmail.joseifpb2015.TCC.entidades.Usuario;
 import java.io.IOException;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.primefaces.json.JSONException;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -47,8 +54,8 @@ public class InscricaoControler {
 
     @Autowired
     private InscricaoServico inscricaoServico;
+
     @Autowired
-   
 
     @GetMapping
     public ResponseEntity<List<Inscricao>> listarTodos() {
@@ -61,18 +68,46 @@ public class InscricaoControler {
      * @return
      */
     @GetMapping(path = "/{id}")
-    public ResponseEntity<Response<Inscricao>> listarPorId(@PathVariable(name = "id") String id) {
-        return ResponseEntity.ok(new Response(inscricaoServico.listarPorId(id)));
+    public ResponseEntity<List<Inscricao>> listarPorId(@PathVariable(name = "id") String id) {
+        List<Inscricao> in = new ArrayList<>();
+        in.add(inscricaoServico.listarPorId(id));
+        return ResponseEntity.ok(in);
+    }
+
+    @GetMapping(path = "/usuario/{email}")
+    public ResponseEntity<List<Inscricao>> listarEmail(@PathVariable(name = "email") String email) {
+        System.err.println("pegandp a inscricapo " + inscricaoServico.BuscarPorUserAndEvento("mariagv17111964@gmail.com", "60d0aacda1903d52527b81f4"));
+        return ResponseEntity.ok((inscricaoServico.buscarPorEmail(email + ".com", null)));
+
+        //return null;
+    }
+
+    @GetMapping(path = "/usuarioevento/{idevento}")
+    public ResponseEntity<Inscricao> credenciar(@PathVariable(name = "idevento") String idevento, @RequestParam(name = "user") String user) {
+        System.err.println("pegandp a inscricapo evento " + idevento + " " + user);
+       
+        try (final DatagramSocket socket = new DatagramSocket()) {
+            socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
+            String ip = socket.getLocalAddress().getHostAddress();
+            System.out.println("IP "+ip);
+        } catch (Exception ex) {
+            Logger.getLogger(InscricaoControler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // System.err.println("pegandp a inscricapo evento " +inscricaoServico.BuscarPorUserAndEvento(user+".com", idevento));
+        return ResponseEntity.ok((inscricaoServico.BuscarPorUserAndEvento(user + ".com", idevento)));
+        // return null;
+
+        //return null;
     }
 
     @PostMapping
     public ResponseEntity<Inscricao> cadastrar(@Valid @RequestBody Inscricao inscricao, BindingResult result) throws IOException, JSONException {
         System.err.println("cadastrando inscriçao");
         try {
-          
-            if (inscricao!=null) {
+
+            if (inscricao != null) {
                 Inscricao reslt = inscricaoServico.cadastrar(inscricao);
-               System.err.println("cadastra inscricao servi "+reslt);
+                System.err.println("cadastra inscricao servi " + reslt);
                 return ResponseEntity.ok(reslt);
             }
             return ResponseEntity.ok(new Inscricao());
@@ -80,8 +115,6 @@ public class InscricaoControler {
         }
         return null;
     }
-
-   
 
     @PutMapping(path = "/{id}")
     public ResponseEntity<Response<Inscricao>> atualizar(@PathVariable(name = "id") String id, @Valid @RequestBody Inscricao usuario, BindingResult result) {

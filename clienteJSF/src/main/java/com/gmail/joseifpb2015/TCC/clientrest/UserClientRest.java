@@ -79,7 +79,7 @@ public class UserClientRest implements Serializable {
 
     public static void salvar(Usuario usuario) throws MalformedURLException, IOException {
         conPost(usuario, "");
-        System.err.println("met sal rest user");
+      
     }
 
     public static void conPost(Usuario usuario, String uri) throws MalformedURLException, IOException {
@@ -207,6 +207,34 @@ public class UserClientRest implements Serializable {
         System.err.println("usuari log " + u.toString());
 
         return converte(dados).get(0);
+    }
+    public List<Usuario> listUsuarios(QueryUSer usuarios) throws IOException, JSONException {
+        System.out.println("logar() "+getProp().getProperty("urluser"));
+        URL url = new URL(urlSetting + "palestrantes");
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        // Define que a conexão pode enviar informações e obtê-las de volta:
+        connection.setDoOutput(true);
+        connection.setDoInput(true);
+        connection.setRequestProperty("Content-Type", "application/json");
+        // connection.setRequestProperty("Accept", "application/json");
+        connection.setRequestMethod("POST");
+        connection.connect();
+        Gson g = new Gson();
+        String json = g.toJson(usuarios);
+        try (OutputStreamWriter outputStream = new OutputStreamWriter(connection.getOutputStream())) {
+            //outputStream.write(json.getBytes("UTF-8"));
+            outputStream.write(json);
+        }
+        BufferedReader rd = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        String dados = rd.readLine();
+        System.err.println("lendo dados palestra " + dados);
+
+        if (connection.getResponseCode() != 200) {
+            throw new RuntimeException("HTTP GET erro code: " + connection.getResponseCode());
+        }
+        
+
+        return converte(dados);
     }
 
     public String reeviarEvail(Usuario u, String uri) throws IOException, JSONException {

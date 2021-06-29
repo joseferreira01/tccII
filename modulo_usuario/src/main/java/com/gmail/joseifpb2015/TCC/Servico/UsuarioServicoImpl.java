@@ -77,5 +77,11 @@ public class UsuarioServicoImpl extends ServicoImpl<Usuario, String> implements 
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<Usuario> findByIdIn(List<String> id) {
+        System.err.println("erro de palestra "+repositorio.findByIdIn(id));
+        return repositorio.findByIdIn(id);
+       }
+
    
 }

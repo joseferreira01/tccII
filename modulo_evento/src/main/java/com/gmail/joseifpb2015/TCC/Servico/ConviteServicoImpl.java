@@ -49,7 +49,7 @@ public class ConviteServicoImpl extends ServicoImpl<Convite, String> implements 
             switch (convite.getTipo()) {
 
                 case PALESTRANTE:
-                    System.err.println("apl");
+                    System.err.println("apl palestrante");
                     evento.addPalestrante(convite.getEmailDoConvidado());
                     break;
                 case PARTICIPANTE:

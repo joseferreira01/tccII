@@ -17,9 +17,10 @@ import org.springframework.data.domain.Pageable;
 public interface InscricaoRepositorio extends Repositorio<Inscricao, String> {
 
      public List<Inscricao> findByEmailUsuario(String id, Pageable pageable);
+     public Inscricao findByEmailUsuarioAndIdEvento(String enail,String idEvento);
 
      public List<Inscricao> findByidEvento(String id, Pageable pageable);
-
+     
      public List<Inscricao> findByidEventoAndStatus(String id, StatusInscricao status, Pageable pageable);
 
      public List<Inscricao> findByEmailUsuarioAndStatus(String id, StatusInscricao status, Pageable pageable);

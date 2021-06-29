@@ -150,6 +150,7 @@ public class UserCotroladorLogado implements Serializable {
 
     public String aceitarConvite(String idConvite) {
         try {
+            System.out.println("entre no controle acita convite");
             servicoEveRest.aceitarConvite(idConvite);
             carregarConvites();
             msg.addMessage("Convite aceito");

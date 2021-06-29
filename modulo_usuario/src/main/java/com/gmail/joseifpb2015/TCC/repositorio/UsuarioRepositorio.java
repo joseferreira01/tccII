@@ -6,6 +6,7 @@
 package com.gmail.joseifpb2015.TCC.repositorio;
 
 import com.gmail.joseifpb2015.TCC.entidades.Usuario;
+import java.util.List;
 
 
 
@@ -18,5 +19,6 @@ public interface UsuarioRepositorio extends Repositorio<Usuario, String> {
     public Usuario findByEmail(String email);
 
     public Usuario findById(String codigo);
+     List<Usuario> findByIdIn(List<String> id);
 
 }

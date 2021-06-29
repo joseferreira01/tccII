@@ -62,8 +62,8 @@ public class ConviteControle {
     @GetMapping(path = "/aceitar/{key}")
     public ResponseEntity<Response<String>> aceitarConvite(@PathVariable(name = "key") String key) {
         Servico.aceitarConvite(key);
-        System.err.println("aceitar");
-        return ResponseEntity.ok(new Response(new String("convite aceito")));
+        System.err.println("aceitar ocinvie bac");
+        return ResponseEntity.ok(new Response("convite aceito"));
     }
 
     @GetMapping(path = "/recusar/{key}")

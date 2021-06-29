@@ -5,9 +5,11 @@
  */
 package com.gmail.joseifpb2015.TCC.clientrest;
 
+import static com.gmail.joseifpb2015.TCC.clientrest.UserClientRest.getProp;
 import com.gmail.joseifpb2015.TCC.controladores.Atividade;
 import com.gmail.joseifpb2015.TCC.controladores.Convite;
 import com.gmail.joseifpb2015.TCC.controladores.Evento;
+import com.gmail.joseifpb2015.TCC.controladores.Usuario;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -75,7 +77,7 @@ public class EventoClientRest implements Serializable {
     }
 
     public String aceitarConvite(String idEvento) throws JSONException {
-        System.err.println("dados convite");
+        System.err.println("dados convite aceite");
         try {
             BufferedReader responseBuffer = getMetodo(urlSetting + "eventos/convite/aceitar/" + idEvento);
             return responseBuffer.readLine();
@@ -152,6 +154,36 @@ public class EventoClientRest implements Serializable {
         return dados;
 
     }
+    
+    public void logar() throws IOException, JSONException {
+           System.err.println("passo");
+        URL url = new URL("https://api.mercadopago.com/users/test_user");
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        // Define que a conexão pode enviar informações e obtê-las de volta:
+        connection.setDoOutput(true);
+        connection.setDoInput(true);
+        connection.setRequestProperty("Content-Type", "application/json");
+         connection.setRequestProperty("Authorization", "Bearer PROD_ACCESS_TOKEN");
+        connection.setRequestMethod("POST");
+        connection.connect();
+        System.err.println("passo");
+        Gson g = new Gson();
+        String json = g.toJson("-d '{\"site_id\":\"MLB\"}'");
+        try (OutputStreamWriter outputStream = new OutputStreamWriter(connection.getOutputStream())) {
+            //outputStream.write(json.getBytes("UTF-8"));
+            outputStream.write(json);
+        }
+        BufferedReader rd = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        String dados = rd.readLine();
+        System.err.println("lendo dados mercado pago " + dados);
+
+        if (connection.getResponseCode() != 200) {
+            throw new RuntimeException("HTTP GET erro code: " + connection.getResponseCode());
+        }
+       
+
+        
+    }
 
     public List<Atividade> listAtividades(String iDevento, int pag) throws JSONException {
 
@@ -187,9 +219,9 @@ public class EventoClientRest implements Serializable {
 
     }
     public Evento eventoKey(String id) throws JSONException {
-
+            System.err.println("ta vindo id "+id);
         try {
-            BufferedReader responseBuffer = getMetodo(urlSetting + "eventos/key/" + id);
+            BufferedReader responseBuffer = getMetodo("http://localhost:8081/api/eventos/key/" + id);
          //   System.err.println("host " + urlSetting + id);
             StringBuffer dados = new StringBuffer(responseBuffer.readLine());
             return converte(dados).get(0);
@@ -257,7 +289,7 @@ public class EventoClientRest implements Serializable {
             throw new RuntimeException("HTTP GET erro code: " + connection.getResponseCode());
         }
     }
-
+ 
     public void delete(String caminho, String id) throws MalformedURLException, IOException {
         URL url = new URL(urlSetting + caminho + id);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -405,5 +437,8 @@ public class EventoClientRest implements Serializable {
 
     public void salvarConvite(StringBuffer json) throws IOException {
         conPost(json, "eventos/convite");
+    }
+    public String pagar(){
+        return null;
     }
 }

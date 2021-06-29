@@ -9,6 +9,8 @@ import com.gmail.joseifpb2015.TCC.utilitario.Mensagem;
 import com.gmail.joseifpb2015.TCC.clientrest.EventoClientRest;
 import com.gmail.joseifpb2015.TCC.clientrest.FormClientRest;
 import com.gmail.joseifpb2015.TCC.clientrest.InscricaoClientRest;
+import com.gmail.joseifpb2015.TCC.clientrest.QueryUSer;
+import com.gmail.joseifpb2015.TCC.clientrest.UserClientRest;
 import com.gmail.joseifpb2015.TCC.entidades.Campo;
 import com.google.gson.Gson;
 import com.vividsolutions.jts.io.WKTReader;
@@ -48,6 +50,9 @@ import org.primefaces.json.JSONException;
 public class EventoCotrolador implements Serializable {
 
     @Inject
+    private UserClientRest userCliente;
+
+    @Inject
     private EventoClientRest servico;
     @Inject
     private FormClientRest formClientRest;
@@ -65,7 +70,7 @@ public class EventoCotrolador implements Serializable {
     private List<Atividade> atividades;
     HashMap<String, String> estados;
     HashMap<String, String> formato;
-    private WKTReader reader = new WKTReader();
+    private String a;
 
     public HashMap<String, String> getFormato() {
         return formato;
@@ -228,6 +233,7 @@ public class EventoCotrolador implements Serializable {
     public String editar(Evento evento) {
         Usuario usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
         this.evento = evento;
+        a = evento.getEndereco().getLocalizacao().getLat() + "," + evento.getEndereco().getLocalizacao().getLat();
 
         if (usuario.getId() == null ? evento.getOrganizador() == null : usuario.getId().equals(evento.getOrganizador())) {
             //   System.err.println("pagina de edi " + evento);
@@ -266,12 +272,13 @@ public class EventoCotrolador implements Serializable {
             File file = new File("img");
 
             String localizacao = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("local");
-          String local[] = localizacao.split(Pattern.quote(","));
+            a = localizacao;
+            System.err.println("mostrando " + a);
+            String local[] = localizacao.split(Pattern.quote(","));
             evento.getEndereco().getLocalizacao().setLat(local[0]);
             evento.getEndereco().getLocalizacao().setLng(local[1]);
-            System.err.println("local pomto" + localizacao+ " vid"+ local[0]+" "+local[1]);
+            System.err.println("local pomto" + localizacao + " vid" + local[0] + " " + local[1]);
 
-          
             //    evento.getEndereco().setLocalizacao(reader.read("POINT(" + localizacao + ")"));
             evento.setDataInicio(date);
             evento.setDataTernino(date2);
@@ -281,7 +288,7 @@ public class EventoCotrolador implements Serializable {
             StringBuffer json = new StringBuffer();
             json.append(g.toJson(evento));
             // System.out.println("json evento -> " + json);
-             servico.salvarEvento(json);
+            servico.salvarEvento(json);
             eventos = servico.todos();
             msg.addMessage("Evento salvo");
         } catch (IOException | JSONException e) {
@@ -333,6 +340,19 @@ public class EventoCotrolador implements Serializable {
         convite = new Convite();
         return "edit-evento?faces-redirect=true";
 
+    }
+
+    public Usuario palestrantes() {
+
+        try {
+            QueryUSer queryUSer = new QueryUSer();
+            queryUSer.setId(evento.getParticipantes());
+            // return userCliente.listUsuarios(queryUSer).get(0);
+        } catch (Exception ex) {
+            Logger.getLogger(EventoCotrolador.class.getName()).log(Level.SEVERE, null, ex);
+            return null;//Collections.EMPTY_LIST;
+        }
+        return null;
     }
 
     public String apagarAtividade() {
@@ -484,7 +504,7 @@ public class EventoCotrolador implements Serializable {
     }
 
     public String inscricao(String idEvento) throws IOException, JSONException {
-        Evento e = servico.eventoKey(idEvento);;
+        Evento e = servico.eventoKey(idEvento);
         if (e.getForm() == null) {
 
             inscricao.setIdEvento(e.getId());
@@ -634,6 +654,26 @@ public class EventoCotrolador implements Serializable {
                 Logger.getLogger(EventoCotrolador.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        return null;
+    }
+
+    public String getA() {
+        return a;
+    }
+
+    public void setA(String a) {
+        this.a = a;
+    }
+
+    public String pagar() {
+        try {
+            servico.logar();
+        } catch (IOException ex) {
+            Logger.getLogger(EventoCotrolador.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JSONException ex) {
+            Logger.getLogger(EventoCotrolador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        msg.addMessage("Evento excluído");
         return null;
     }
 

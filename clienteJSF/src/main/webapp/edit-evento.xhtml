@@ -191,11 +191,7 @@
                         <p:panel>
 
                             <h:panelGrid columns="2" columnClasses="label, value">
-                                <h:outputText value="nome: *" />
-                                <p:inputText value="#{eventoconf.evento.cargaHoraria}" required="true" label="Email"/>
-
-                                <h:outputText value="organizado: " />
-                                <p:inputText value="#{eventoconf.evento.organizador}"/>
+                               
 
                             </h:panelGrid>
                         </p:panel>
@@ -205,12 +201,7 @@
                         <p:panel>
 
                             <h:panelGrid columns="2" columnClasses="label, value">
-                                <h:outputText value="nome: *" />
-                                <p:inputText value="#{eventoconf.evento.cargaHoraria}" required="true" label="Email"/>
-
-                                <h:outputText value="organizado: " />
-                                <p:inputText value="#{eventoconf.evento.organizador}"/>
-
+                               
                             </h:panelGrid>
                         </p:panel>
                     </p:tab>
@@ -231,11 +222,9 @@
                         <p:panel>
 
                             <h:panelGrid columns="2" columnClasses="label, value">
-                                <h:outputText value="nome: *" />
-                                <p:inputText value="#{eventoconf.evento.cargaHoraria}" required="true" label="Email"/>
-
-                                <h:outputText value="organizado: " />
-                                <p:inputText value="#{eventoconf.evento.organizador}"/>
+                                
+                                <p:commandButton value="Configurar pagamento" class="btn btn-success  btn-lg" action="#{eventoCotrolador.pagar()}" update="growl" process="@this"/>
+                               
 
                             </h:panelGrid>
                         </p:panel>

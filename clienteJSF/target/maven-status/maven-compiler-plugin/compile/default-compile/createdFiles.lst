@@ -36,5 +36,7 @@ com/gmail/joseifpb2015/TCC/controladores/StatusInscricao.class
 com/gmail/joseifpb2015/TCC/controladores/Convite.class
 com/gmail/joseifpb2015/TCC/controladores/StatusConvite.class
 com/gmail/joseifpb2015/TCC/utilitario/Formacao.class
+com/gmail/joseifpb2015/TCC/controladores/ViewIncricao.class
 com/gmail/joseifpb2015/TCC/controladores/inscricaoCotrolador1.class
+com/gmail/joseifpb2015/TCC/clientrest/QueryUSer.class
 com/gmail/joseifpb2015/TCC/exceptions/CustomExceptionHandler.class

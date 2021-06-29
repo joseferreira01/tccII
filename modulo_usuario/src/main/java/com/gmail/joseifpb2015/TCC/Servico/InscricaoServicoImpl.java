@@ -38,8 +38,8 @@ public class InscricaoServicoImpl extends ServicoImpl<Inscricao, String> impleme
     private ClientRestFull<Object> restFull;
 
     @Override
-    public List<Inscricao> buscarPorEmail(String id, Pageable pageable) {
-        return repositorio.findByEmailUsuario(id, pageable);
+    public List<Inscricao> buscarPorEmail(String email, Pageable pageable) {
+        return repositorio.findByEmailUsuario(email, pageable);
     }
 
     @Override
@@ -96,6 +96,11 @@ public class InscricaoServicoImpl extends ServicoImpl<Inscricao, String> impleme
             return 0;
         }
         return 1;
+    }
+
+    @Override
+    public Inscricao BuscarPorUserAndEvento(String email, String IDEvento) {
+       return repositorio.findByEmailUsuarioAndIdEvento(email, IDEvento);
     }
 
 }

@@ -43,6 +43,7 @@ import org.springframework.core.env.Environment;
 @RequestMapping(path = "/api/usuarios")
 //@RequestMapping(path = "/api/usuarios")
 public class UsuarioControler {
+    private QueryUSer query;
 
     @Autowired
     private Environment env;
@@ -68,6 +69,11 @@ public class UsuarioControler {
     @GetMapping(path = "/{id}")
     public ResponseEntity<Response<Usuario>> listarPorId(@PathVariable(name = "id") String id) {
         return ResponseEntity.ok(new Response(usuarioServico.listarPorId(id)));
+    }
+       @PostMapping(path = "/palestrantes")
+    public ResponseEntity<List<Usuario>> listarPalestrnte(@Valid @RequestBody QueryUSer id, BindingResult result) {
+        return ResponseEntity.ok((usuarioServico.findByIdIn(id.getId())));
+                                                                           
     }
 
     @PostMapping

@@ -17,6 +17,7 @@ import org.springframework.data.domain.Pageable;
 public interface InscricaoServico extends Servico<Inscricao> {
 
     public List<Inscricao> buscarPorEmail(String id, Pageable pageable);
+    public Inscricao BuscarPorUserAndEvento(String email,String IDEvento);
 
     public List<Inscricao> buscarPorIDEvento(String id, Pageable pageable);
 
