@@ -6,6 +6,7 @@
 package com.gmail.joseifpb2015.TCC.controladores;
 
 import com.gmail.joseifpb2015.TCC.clientrest.InscricaoClientRest;
+import com.gmail.joseifpb2015.TCC.utilitario.Mensagem;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
@@ -27,6 +28,8 @@ public class ViewIncricao {
     private String idIncricao;
     @Inject
     private InscricaoClientRest rest;
+    @Inject
+    private Mensagem msg;
 
     @PostConstruct
     public void iniciar() {
@@ -57,6 +60,13 @@ public class ViewIncricao {
 
     public void setIdIncricao(String idIncricao) {
         this.idIncricao = idIncricao;
+    }
+    public String entrar(){
+        return null;
+    }
+    public String autorizar(){
+        msg.addMessage("Participante aotorizado");
+        return "edit-atividada?faces-redirect=true";
     }
 
 }

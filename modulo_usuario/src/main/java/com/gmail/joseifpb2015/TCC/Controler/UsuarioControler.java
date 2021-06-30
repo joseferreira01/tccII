@@ -218,6 +218,7 @@ public class UsuarioControler {
         retorno.add("Conta ativada com sucesso");
         System.err.println("enviando cod " + retorno.get(0));
         JsonObject msg = new JsonObject();
+        msg.addProperty("sendername","Eventservice");
         msg.addProperty("senderemail", "joseifpb2015@gmail.com");
         msg.addProperty("receiveremail", usuario.getEmail());
         msg.addProperty("subject", "Codigo de validação");

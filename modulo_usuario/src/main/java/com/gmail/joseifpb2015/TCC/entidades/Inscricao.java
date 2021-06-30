@@ -36,6 +36,9 @@ public class Inscricao implements Serializable {
     @Column(unique = true, nullable = false)
     private StatusInscricao status;
     private List<MockAtividades> atividades;
+    private String foto;
+    private String nome;
+    private String QRcode;
    
     private List<InfoAdicional> outros;
 
@@ -122,6 +125,30 @@ public class Inscricao implements Serializable {
     }
     public void removeInfo(InfoAdicional ia) {
         this.outros.remove(ia);
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getQRcode() {
+        return QRcode;
+    }
+
+    public void setQRcode(String QRcode) {
+        this.QRcode = QRcode;
     }
     
 }

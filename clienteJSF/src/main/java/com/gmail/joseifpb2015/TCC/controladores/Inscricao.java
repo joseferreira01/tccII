@@ -20,8 +20,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * @author jose
  */
 @Document
-public class Inscricao implements Serializable{
-    
+public class Inscricao implements Serializable {
+
     @Id
     private String id;
     @NotEmpty(message = "informe o evento para o qual deseja inscrever-se")
@@ -31,15 +31,16 @@ public class Inscricao implements Serializable{
     @NotEmpty(message = "infome titulo do evento")
     private String tituloEvento;
     @Enumerated(EnumType.STRING)
-    @Column(unique = true, nullable =false)
+    @Column(unique = true, nullable = false)
     private StatusInscricao status;
     private List<MockAtividades> atividades;
     private List<InfoAdicional> outros;
+    private String foto;
+    private String nome;
 
     public Inscricao() {
         this.status = StatusInscricao.INSCRITO;
     }
-    
 
     public String getId() {
         return id;
@@ -56,7 +57,6 @@ public class Inscricao implements Serializable{
     public void setTituloEvento(String tituloEvento) {
         this.tituloEvento = tituloEvento;
     }
-    
 
     public String getIdEvento() {
         return idEvento;
@@ -102,6 +102,21 @@ public class Inscricao implements Serializable{
     public void setOutros(List<InfoAdicional> outros) {
         this.outros = outros;
     }
-    
-            
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
 }

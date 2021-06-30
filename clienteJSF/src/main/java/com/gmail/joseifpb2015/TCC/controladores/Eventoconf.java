@@ -162,5 +162,8 @@ public class Eventoconf implements Serializable {
             return event.getNewStep();
         }
     }
-
+public String publicar(){
+     msg.addMessage("evento publicado com sucesso! ");
+    return null;
+}
 }

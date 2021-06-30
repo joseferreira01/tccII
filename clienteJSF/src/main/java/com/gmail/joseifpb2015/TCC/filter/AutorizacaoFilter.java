@@ -40,6 +40,7 @@ public class AutorizacaoFilter implements Filter {
                 || request.getRequestURI().endsWith("/faces/al-senha.xhtml")
                 || request.getRequestURI().endsWith("/faces/habiltar.xhtml")
                 || request.getRequestURI().endsWith("/faces/in.xhtml")
+                || request.getRequestURI().endsWith("/faces/credenciar.xhtml")
                 || request.getRequestURI().endsWith("/faces/ver.xhtml")
                 || request.getRequestURI().endsWith("/faces/404.xhtml")
                 || request.getRequestURI()

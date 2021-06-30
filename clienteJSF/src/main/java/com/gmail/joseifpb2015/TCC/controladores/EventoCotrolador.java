@@ -114,6 +114,14 @@ public class EventoCotrolador implements Serializable {
         tipoAtividade.put("palestra", "palestra");
         tipoAtividade.put("aula", "aula");
         tipoAtividade.put("mostra", "mostra");
+        tipoAtividade.put("Simpósios", "Simpósios");
+        tipoAtividade.put("Seminários", "Seminários");
+        tipoAtividade.put("Congresso", "Congresso");
+        tipoAtividade.put("Curso", "Curso");
+        tipoAtividade.put("Mesa-redonda", "Mesa-redonda");
+        tipoAtividade.put("Jornada", "Jornada");
+        tipoAtividade.put("Workshop", "Workshop");
+        tipoAtividade.put("Forum", "Forum");
         tipoConvite.put(TipoConvidado.PALESTRANTE.name(), TipoConvidado.PALESTRANTE.name());
         tipoConvite.put(TipoConvidado.COLABORADOR.name(), TipoConvidado.COLABORADOR.name());
         tipoConvite.put(TipoConvidado.PARTICIPANTE.name(), TipoConvidado.PARTICIPANTE.name());
@@ -509,6 +517,8 @@ public class EventoCotrolador implements Serializable {
 
             inscricao.setIdEvento(e.getId());
             inscricao.setEmailUsuario(usuario.getEmail());
+            inscricao.setNome(usuario.getNome());
+            inscricao.setFoto(usuario.getFoto());
             inscricao.setTituloEvento(e.getTitulo());
             try {
                 InscricaoClientRest.salvar(inscricao);

@@ -1,18 +1,38 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Facelet Title</title>
-        
+        <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"/>
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet"/>
+
+        <!-- Custom styles for this template-->
+        <link href="css/sb-admin-2.min.css" rel="stylesheet"/>
     </h:head>
     <h:body>
-        <h:outputText value="#{viewIncricao.inscricao.tituloEvento}"/>
+          <p:messages  id="messages" autoUpdate="false" showDetail="false" closable="true"/>
         <br/>
         <br/>
+        <h:outputText style="{margin-left: 10px;position: relative}" value="#{viewIncricao.inscricao.tituloEvento}"/>
         <br/>
-        <h:outputText value="#{viewIncricao.inscricao.emailUsuario}"/>
-        
+
+        <h:graphicImage class="img-profile rounded-circle col-1" value="data:image/jpg;base64,#{viewIncricao.inscricao.foto}"/>
+        <h:outputText value="#{viewIncricao.inscricao.nome}"/>
+
+
+        <div class="form-group col-md-1">
+            <br/>
+            <h:form>
+                
+            <h:commandButton  class="btn-success" id="tbn-savebasico" action="#{viewIncricao.autorizar()}" value="Autorizar"> </h:commandButton>
+            </h:form>
+        </div>
+        <br/>
+        <br/>
+
     </h:body>
 </html>
 
