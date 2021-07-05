@@ -192,25 +192,16 @@
 
                             <h:panelGrid columns="2" columnClasses="label, value">
                                 <h:form>    
-                                    <h:dataTable class="table table-bordered" id="dataTable" width="100%" cellspacing="0" var="at"  value="#{eventoCotrolador.evento.palestrante}" style="margin-bottom:40px">
+                                    <h:dataTable class="table table-bordered" id="dataTable" width="100%" cellspacing="0" var="at"  value="#{eventoCotrolador.a}" style="margin-bottom:40px">
 
                                         <p:column headerText="Titulo">
-                                            <h:outputText class="text-center" style="text-align: center; position: relative" value="#{at.titulo}" />
+                                            <h:outputText class="text-center" style="text-align: center; position: relative" value="#{eventoCotrolador.nomes()}" />
                                         </p:column>
 
-                                        <p:column headerText="Tipo">
-                                            <h:outputText class="text-center" value="#{at.tipo}" />
-                                        </p:column>
 
-                                        <p:column headerText="Início" >
-                                            <h:outputText value="#{at.dataInicio}" />
-                                        </p:column>
-
-                                        <p:column headerText="Fim" >
-                                            <h:outputText value="#{at.dataFim}" />
-                                        </p:column>
+                                       
                                         <p:column headerText="editar"  class="">
-                                            <h:commandButton class="btn btn-link" action="#{eventoCotrolador.editarAtividade(at)}" value="editar"/>
+                                          
 
 
                                         </p:column>
@@ -228,28 +219,15 @@
 
                             <h:panelGrid columns="2" columnClasses="label, value">
                                 <h:form>    
-                                    <h:dataTable class="table table-bordered" id="dataTable" width="100%" cellspacing="0" var="at"  value="#{eventoCotrolador.evento.participantes}" style="margin-bottom:40px">
+                                    <h:dataTable class="table table-bordered" id="dataTable" width="100%" cellspacing="0" var="p"  value="#{eventoCotrolador.a}" style="margin-bottom:40px">
 
-                                        <p:column headerText="Titulo">
-                                            <h:outputText class="text-center" style="text-align: center; position: relative" value="#{at.titulo}" />
-                                        </p:column>
-
-                                        <p:column headerText="Tipo">
-                                            <h:outputText class="text-center" value="#{at.tipo}" />
-                                        </p:column>
+                                       
 
                                         <p:column headerText="Início" >
-                                            <h:outputText value="" />
+                                            <h:outputText value="#{eventoCotrolador.nomes1()}" />
                                         </p:column>
 
-                                        <p:column headerText="Fim" >
-                                            <h:outputText value="   " />
-                                        </p:column>
-                                        <p:column headerText="editar"  class="">
-                                            <h:commandButton class="btn btn-link" action="#{eventoCotrolador.editarAtividade(at)}" value="editar"/>
-
-
-                                        </p:column>
+                                        
 
 
                                     </h:dataTable>
@@ -266,11 +244,13 @@
                                     <input class="form-check-input" type="radio" id="flexSwitchCheckDefault"/>
                                         <label class="form-check-label" for="flexSwitchCheckDefault">inscrições gratuitas</label>
                                 </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="radio" id="flexSwitchCheckDefault23"/>
+                                        <label class="form-check-label" for="flexSwitchCheckDefault23">inscrições pagas</label>
+                                </div>
                                
 
-                                <a  class="btn btn-primary" href="#" data-toggle="modal" data-target="#pagamentomodel">
-                                    Inscrição paga
-                                </a>
+                              
 
 
                             </h:panelGrid>

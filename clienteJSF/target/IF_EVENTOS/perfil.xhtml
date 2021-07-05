@@ -35,7 +35,7 @@
                             <br/>
                             <br/>
 
-                            <h:commandButton style="position: relative; margin-top: 2%" action="#{userCotroladorLogado.salveFoto()}" value="salvar" class="btn btn-success col-2 " >
+                            <h:commandButton style="position: relative; margin-top: 2%; display: none" action="#{userCotroladorLogado.salveFoto()}" value="salvar" class="btn btn-success col-2 " >
                                 <f:ajax execute="@form" render="@all" />
                             </h:commandButton>
 
@@ -92,15 +92,15 @@
                                 <p:inputMask mask="99/99/9999" value="#{userCotroladorLogado.dadosPessoais.nascimento}" class="form-control" id="inputnascimento"/>
                             </div>
 
-                            <h:commandButton  action="#{userCotroladorLogado.salvarInfo()}" class="btn btn-success" value="salvar"/>
+                           
                         </h:form>
                     </div>
 
 
-                    <h3 style="position: relative; margin-left: 60%; margin-top: -52% ">Formação</h3>
+                    <h3 style="position: relative; margin-left: 63%; margin-top: -40% ">Formação</h3>
 
 
-                    <div class="form-row col-48" style="position: relative; margin-left: 55%; margin-top:10px " >
+                    <div class="form-row col-48" style="position: relative; margin-left: 55%; margin-top: 60px " >
             
                         <h:form >
 
@@ -119,7 +119,7 @@
                             <div class="form-group col-md-12" style="position: relative; margin-left: 100%; margin-top: -20% ">
 
 
-                                <h:commandButton  action="#{userCotroladorLogado.salvarFormacao()}" class="btn btn-success" value="salvar"/>
+                                <h:commandButton  action="#{userCotroladorLogado.salvarFormacao()}" class="btn btn-success" style=" display: none" value="salvar"/>
                             </div>
                         </h:form>
                     </div>
@@ -127,7 +127,7 @@
 
 
 
-                    <div class="form-row col-48" style="position: relative;margin-top: 28%" >
+                    <div class="form-row col-48" style="position: relative;margin-top: 18%" >
 
                         <h:form >
 
@@ -136,7 +136,7 @@
                                 <label for="inputcpf">rua</label>
                                 <h:inputText  value="#{userCotroladorLogado.endereco.rua}" class="form-control" id="inputcpf"/>
                             </div>
-                            <div class="form-group col-md-12" style="position: relative; margin-left: 100%; margin-top: -35% ">
+                            <div class="form-group col-md-12" style="position: relative; margin-left: 100%; margin-top: -32% ">
                                 <label for="inputtelfixo">bairro</label>
                                 <p:inputText value="#{userCotroladorLogado.endereco.bairro}" class="form-control"  id="inputtelfixo"/>
                             </div>

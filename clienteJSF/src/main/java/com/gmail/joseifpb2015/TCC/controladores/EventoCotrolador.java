@@ -92,6 +92,7 @@ public class EventoCotrolador implements Serializable {
 
     @PostConstruct
     public void posCon() {
+        atividades = new ArrayList<>();
         usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
         this.inscricao = new Inscricao();
         this.atividade = new Atividade();
@@ -103,7 +104,9 @@ public class EventoCotrolador implements Serializable {
         estados.put("PB", "Paraíba");
         estados.put("SP", "São Paulo");
         estados.put("RJ", "Rio de Janeiro");
-
+       
+                
+        atividades.add(atividade);
         formato = new HashMap<>();
 
         formato.put("Presencial", "Presencial");
@@ -146,7 +149,20 @@ public class EventoCotrolador implements Serializable {
             eventos = servico.eventosPorOrganizador(usuario.getId(), 0);
         }
     }
-
+public List<String> nomes(){
+    List<String> a = new ArrayList();
+    a.add("Ana da Silva");
+    a.add("Maria santos");
+    a.add("João Ferreira");
+    return a;
+}
+public List<String> nomes1(){
+    List<String> a = new ArrayList();
+    a.add("Paulo F. Neto");
+    a.add("José Ferreira");
+   
+    return a;
+}
     public void atividadePage(int page) throws JSONException {
         //System.err.println("contro lisst atividade");
 //  Usuario usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
@@ -167,6 +183,17 @@ public class EventoCotrolador implements Serializable {
         this.atividade = new Atividade();
         //  System.err.println("editar atividade");
         return "criar-atividada?faces-redirect=true";
+    }
+    private void eu(){
+        atividades = new ArrayList<>();
+         atividade.setTitulo("inovação e tecnologia");
+        atividade.setTipo("Palestra");
+        atividade.setDataInicio("0306/2021 As 18:00");
+        atividades.add(atividade);
+         atividade.setTitulo("Ecossistema JavaScript");
+        atividade.setTipo("Workshop");
+        atividade.setDataInicio("0306/2021 As 17:45");
+        atividades.add(atividade);
     }
 
     public boolean validarData(String data) {
@@ -191,13 +218,9 @@ public class EventoCotrolador implements Serializable {
     }
 
     public List<Atividade> getAtividades() {
-
-        try {
-            return servico.listAtividades(evento.getId(), 0);
-        } catch (JSONException ex) {
-            Logger.getLogger(EventoCotrolador.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return Collections.EMPTY_LIST;
+        eu();
+        return atividades;
+        // return servico.listAtividades(evento.getId(), 0);
     }
 
     public void setAtividades(List<Atividade> atividades) {
@@ -308,17 +331,13 @@ public class EventoCotrolador implements Serializable {
     }
 
     public String novaAtividade() {
-        try {
-
-            atividade.setIdEvento(evento.getId());
-            //  System.err.println("jsom atividade " + atividade.toString());
-            Gson g = new Gson();
-            StringBuffer json = new StringBuffer();
-            json.append(g.toJson(atividade));
-            servico.salvarAtividade(json);
-        } catch (IOException e) {
-            msg.addMessage("Erro tente novamrnte ");
-        }
+        atividade.setIdEvento(evento.getId());
+        //  System.err.println("jsom atividade " + atividade.toString());
+        Gson g = new Gson();
+        StringBuffer json = new StringBuffer();
+        json.append(g.toJson(atividade));
+        atividades.add(atividade);
+        //  servico.salvarAtividade(json);
         atividade = new Atividade();
         return "edit-evento?faces-redirect=true";
     }

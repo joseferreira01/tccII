@@ -22,13 +22,17 @@
     </h:head>
 
     <h:body id="body" class="bg-gradient-primary">
+         
+                <br/>
+        <h:commandButton class="btn " style="background-color: #169b6b; color: #fff; margin-left: 10px" value="ENTRAR"></h:commandButton>
+                <!-- Earnings (Monthly) Card Example -->
         <p:messages id="messages" showDetail="false" autoUpdate="false" closable="true"/>
 
         <div class="container" style="margin-top: 20px">
             <div class="row col-12">
-
-                <!-- Earnings (Monthly) Card Example -->
-
+              
+                
+                
 
 
                 <style type="text/css">
@@ -41,11 +45,14 @@
                     }
                 </style>
 
-<!--                <a href="in.xhtml">forme</a>-->
+                <!--                <a href="in.xhtml">forme</a>-->
                 <h:form>
-               
+
                 </h:form>
+              
                 <h:form id="form">
+                    <br/>
+                <br/>
                     <p:dataGrid var="car" value="#{eventoCotrolador.eventos}" columns="4" layout="grid"
                                 rows="20" paginator="false" id="cars" >
 
@@ -55,34 +62,34 @@
 
 
                                 <div class="card-body">
-                                   
+
                                     <h:commandLink  action="#{eventoCotrolador.home(car)}" >
                                         <div style="background-image: url(data:image/jpg;base64,#{car.capa}); color: red; width: 290px; height: 150px; position: relative;margin: 5px">
-                                         
+
                                         </div>
-                                    <div  class="row no-gutters align-items-center">
-                                        
-                                        
-                                           <div class="col-auto align-items-center text-center">
-                                               
-                                              
-                                                   
-                                                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-2">
-                                                             
-                                                          <div style="margin-left: 35px; margin-top: 10px " class="h5 mb-0 font-weight-bold text-gray-800">#{car.titulo}</div>
-                                            <br/>
-                                            <br/>
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-2" style="font-size: 15px;margin-left: 35px"> Inicio #{car.dataInicio}</div>
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-2" style="font-size: 15px;margin-left: 35px"> Fim #{car.dataTernino}</div>
+                                        <div  class="row no-gutters align-items-center">
+
+
+                                            <div class="col-auto align-items-center text-center">
+
+
+
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-2">
+
+                                                    <div style="margin-left: 35px; margin-top: 10px " class="h5 mb-0 font-weight-bold text-gray-800">#{car.titulo}</div>
+                                                    <br/>
+                                                    <br/>
+                                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-2" style="font-size: 15px;margin-left: 35px"> Inicio #{car.dataInicio}</div>
+                                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-2" style="font-size: 15px;margin-left: 35px"> Fim #{car.dataTernino}</div>
+
+                                                </div>
+
+
 
                                             </div>
-                             
-                                             
 
                                         </div>
-                                               
-                                    </div>
-                                         </h:commandLink>
+                                    </h:commandLink>
                                 </div>
                             </h:panelGrid>
                         </p:panel>
@@ -95,9 +102,9 @@
 
                 </h:form>
             </div>
-          
-            </div>
-       
+
+        </div>
+
 
         <!-- Bootstrap core JavaScript-->
         <script src="vendor/jquery/jquery.min.js"></script>

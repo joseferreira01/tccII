@@ -21,9 +21,9 @@
                 <div class="container-fluid">
 
                     <div class="" style="background-image: url(data:image/jpg;base64,#{eventoCotrolador.evento.capa}); width: 100%;height: 350px; position: relative">
-                        <p:outputLabel value="#{eventoCotrolador.evento.titulo}" style="text-justify: inherit; text-align: center; margin-top: 8%; left: 30%; position: relative; color: #ffffff; font-size: 45px" />
+                        <p:outputLabel value="#{eventoCotrolador.evento.titulo}" style="text-justify: inherit; text-align: center; margin-top: 8%; left: 38%; position: relative; color: #ffffff; font-size: 45px" />
                         <br/>
-                        <p:outputLabel value="#{eventoCotrolador.evento.dataInicio} - #{eventoCotrolador.evento.dataTernino} " style="text-justify: inherit; text-align: center; margin-top: -2%; left: 30%; position: relative; color: #ffffff; font-size: 20px" />
+                        <p:outputLabel value="Começa #{eventoCotrolador.evento.dataInicio} Termina #{eventoCotrolador.evento.dataTernino} " style="text-justify: inherit; text-align: center; margin-top: -2%; left: 30%; position: relative; color: #ffffff; font-size: 20px" />
                     </div>
                     <br/>
                     <div>
@@ -96,7 +96,7 @@
 
 
                         <h:form id="form">
-                            <p:dataGrid var="car" value="#{eventoCotrolador.evento.palestrante}" columns="1" layout="grid"
+                            <p:dataGrid  style="position: relative; margin-left: 50px;" var="car" value="#{eventoCotrolador.nomes1()}" columns="4" layout="grid"
                                         paginator="false" id="cars"
 
                                         >
@@ -128,11 +128,12 @@
                     <br/>
                     <h3>Organizador</h3>
                     <a  href="#">
-                        <h:graphicImage class="img-profile rounded-circle col-4" value="data:image/jpg;base64,#{userCotroladorLogado.usuario.foto}"/>
+                        <h:graphicImage class="img-profile rounded-circle col-2" value="data:image/jpg;base64,#{userCotroladorLogado.usuario.foto}"/>
 
                         <br/>
+                        <br/>
 
-                        #{eventoCotrolador.evento.organizador}
+                        #{userCotroladorLogado.usuario.nome}
                     </a>
 
                     <!-- Content Row -->
